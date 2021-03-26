@@ -3,7 +3,9 @@ from pygame.locals import *
 from pygame.color import Color
 import numpy as np
 from enum import Enum
+from settings import *
 import random
+
 
 class Dir(Enum):
     L = 0
@@ -15,9 +17,9 @@ class Dir(Enum):
 class Snake:
     TITLE = "Snake Game"
 
-    def __init__(self, w=640, h=480):
-        self.size = 20
-        self.speed = 90
+    def __init__(self, w=SCREEN_WIDTH, h=SCREEN_HEIGHT):
+        self.size = SIZE
+        self.speed = DEFAULT_SPEED
 
         self.w = w
         self.h = h
