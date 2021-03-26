@@ -1,3 +1,4 @@
+import random
 
 SIZE = 20
 
@@ -24,4 +25,8 @@ BATCH_SIZE = 1000
 LR = 0.001
 
 GAMMA = 0.9
+
 EPSILON = 80
+
+EPS_RANGE = (0, 200)
+is_random_move = lambda eps: random.randint(EPS_RANGE[0], EPS_RANGE[1]) < eps

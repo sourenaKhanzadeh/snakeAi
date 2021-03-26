@@ -4,7 +4,6 @@ from pygame.color import Color
 import numpy as np
 from enum import Enum
 from settings import *
-import random
 
 
 class Dir(Enum):

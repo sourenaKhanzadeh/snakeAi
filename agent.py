@@ -1,5 +1,4 @@
 import torch
-import random
 import numpy as np
 from collections import deque
 from game import Snake, Dir
@@ -87,7 +86,7 @@ class Agent:
         # random moves: tradeoff exploration / exploitation
         self.epsilon = EPSILON - self.n_games
         final_move = [0,0,0]
-        if random.randint(0, 200) < self.epsilon:
+        if is_random_move(self.epsilon):
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
