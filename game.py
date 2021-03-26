@@ -96,7 +96,7 @@ class Snake:
             reward = DefaultImediateReward.COLLISION_WALL.value
             return reward, terminal, self.score
 
-        elif self.frame > 100*len(self.body):
+        if self.frame > 100*len(self.body):
             terminal = True
             reward = DefaultImediateReward.LOOP.value
             return reward, terminal, self.score
