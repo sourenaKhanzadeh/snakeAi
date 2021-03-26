@@ -70,11 +70,19 @@ class Snake:
     def play_step(self, action):
         self.frame += 1
 
+        # Quit out of the game
         for ev in pygame.event.get():
             if ev.type == QUIT:
                 pygame.quit()
                 quit()
+            elif ev.type == KEYDOWN:
+                if ev.key == K_ESCAPE:
+                    pygame.quit()
+                elif ev.key == K_q:
+                    pygame.quit()
+                quit()
 
+        # move snake
         self.move(action)
 
         self.body.insert(0, self.head)
@@ -83,9 +91,14 @@ class Snake:
         reward = DefaultImediateReward.EMPTY_CELL.value
         terminal = False
 
-        if self.collision() or self.frame > 100*len(self.body):
+        if self.collision():
             terminal = True
             reward = DefaultImediateReward.COLLISION_WALL.value
+            return reward, terminal, self.score
+
+        elif self.frame > 100*len(self.body):
+            terminal = True
+            reward = DefaultImediateReward.LOOP.value
             return reward, terminal, self.score
 
 
