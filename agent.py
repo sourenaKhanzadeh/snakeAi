@@ -8,62 +8,15 @@ from settings import *
 
 class Agent:
 
-    def __init__(self):
+    def __init__(self, game):
         self.n_games = 0
         self.epsilon = EPSILON # randomness
         self.gamma = GAMMA # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(11, HIDDEN_SIZE, OUTPUT_SIZE)
+        self.model = Linear_QNet(len(game.get_state()), HIDDEN_SIZE, OUTPUT_SIZE)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
-
-    def get_state(self, game):
-        x, y = head = game.body[0]
-        fx, fy = game.food
-
-        point_l = (x - game.size, y)
-        point_r = (x + game.size, y)
-        point_u = (x, y - game.size)
-        point_d = (x, y + game.size)
-
-        dir_l = game.dir == Dir.L
-        dir_r = game.dir == Dir.R
-        dir_u = game.dir == Dir.U
-        dir_d = game.dir == Dir.D
-
-        state = [
-            # Danger straight
-            (dir_r and game.collision(point_r)) or
-            (dir_l and game.collision(point_l)) or
-            (dir_u and game.collision(point_u)) or
-            (dir_d and game.collision(point_d)),
-
-            # Danger right
-            (dir_u and game.collision(point_r)) or
-            (dir_d and game.collision(point_l)) or
-            (dir_l and game.collision(point_u)) or
-            (dir_r and game.collision(point_d)),
-
-            # Danger left
-            (dir_d and game.collision(point_r)) or
-            (dir_u and game.collision(point_l)) or
-            (dir_r and game.collision(point_u)) or
-            (dir_l and game.collision(point_d)),
-
-            # Move Dir
-            dir_l,
-            dir_r,
-            dir_u,
-            dir_d,
-
-            # Food location
-            fx < x,  # food left
-            fx > x,  # food right
-            fy < y,  # food up
-            fy > y  # food down
-            ]
-
-        return np.array(state, dtype=int)
+        self.game = game
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done)) # popleft if MAX_MEMORY is reached
@@ -103,18 +56,18 @@ def train():
     # plot_mean_scores = []
     # total_score = 0
     record = 0
-    agent = Agent()
     game = Snake()
+    agent = Agent(game)
     while True:
         # get old state
-        state_old = agent.get_state(game)
+        state_old = game.get_state()
 
         # get move
         final_move = agent.get_action(state_old)
 
         # perform move and get new state
         reward, done, score = game.play_step(final_move)
-        state_new = agent.get_state(game)
+        state_new = game.get_state()
 
         # train short memory
         agent.train_short_memory(state_old, final_move, reward, state_new, done)

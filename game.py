@@ -66,6 +66,55 @@ class Snake:
          if self.food in self.body:
              self.gen_food()
 
+
+    def get_state(self):
+        x, y = head = self.body[0]
+        fx, fy = self.food
+
+        point_l = (x - self.size, y)
+        point_r = (x + self.size, y)
+        point_u = (x, y - self.size)
+        point_d = (x, y + self.size)
+
+        dir_l = self.dir == Dir.L
+        dir_r = self.dir == Dir.R
+        dir_u = self.dir == Dir.U
+        dir_d = self.dir == Dir.D
+
+        state = [
+            # Danger straight
+            (dir_r and self.collision(point_r)) or
+            (dir_l and self.collision(point_l)) or
+            (dir_u and self.collision(point_u)) or
+            (dir_d and self.collision(point_d)),
+
+            # Danger right
+            (dir_u and self.collision(point_r)) or
+            (dir_d and self.collision(point_l)) or
+            (dir_l and self.collision(point_u)) or
+            (dir_r and self.collision(point_d)),
+
+            # Danger left
+            (dir_d and self.collision(point_r)) or
+            (dir_u and self.collision(point_l)) or
+            (dir_r and self.collision(point_u)) or
+            (dir_l and self.collision(point_d)),
+
+            # Move Dir
+            dir_l,
+            dir_r,
+            dir_u,
+            dir_d,
+
+            # Food location
+            fx < x,  # food left
+            fx > x,  # food right
+            fy < y,  # food up
+            fy > y  # food down
+            ]
+
+        return np.array(state, dtype=int)
+
     def play_step(self, action):
         self.frame += 1
 
