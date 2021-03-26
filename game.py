@@ -14,6 +14,19 @@ class Dir(Enum):
     D = 3
 
 
+class DefaultImediateReward(Enum):
+    COLLISION_WALL  = -10
+    COLLISION_SELF = -10
+    LOOP = -10
+    SCORED = 10
+    CLOSE_TO_FOOD = 0
+    FAR_FROM_FOOD = 0
+    MID_TO_FOOD = 0
+    VERY_FAR_FROM_FOOD = 0
+    EMPTY_CELL = 0
+
+
+
 class Snake:
     TITLE = "Snake Game"
 
@@ -67,19 +80,19 @@ class Snake:
         self.body.insert(0, self.head)
 
 
-        reward = 0
+        reward = DefaultImediateReward.EMPTY_CELL.value
         terminal = False
 
         if self.collision() or self.frame > 100*len(self.body):
             terminal = True
-            reward = -10
+            reward = DefaultImediateReward.COLLISION_WALL.value
             return reward, terminal, self.score
 
 
         if self.head == self.food:
             self.score += 1
             self.le += 1
-            reward = 10
+            reward = DefaultImediateReward.SCORED.value
             self.gen_food()
         else:
             self.body.pop()
