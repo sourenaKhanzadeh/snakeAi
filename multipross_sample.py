@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import multiprocessing as mp
 from multiprocessing import Pool, Process
+import os
 # Just a sample multiprocessing pygame
 
 class Game:
@@ -29,10 +30,11 @@ def exec():
 
 if __name__ == "__main__":
     processes = []
-    for i in range(4):
+    for i in range(10):
+        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (100+100*i,300)
         p  = Process(target=exec)
         p.start()
         processes.append(p)
 
-    for i in range(len(processes)):
+    for p in processes:
         p.join()
