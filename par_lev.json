@@ -12,7 +12,8 @@
       "eps":80,
       "eps_range":[0, 200],
       "hidden_size":256,
-      "n_food":5
+      "n_food":10,
+      "kill_food":10
 
     },
     {
@@ -27,7 +28,8 @@
       "eps":80,
       "eps_range":[0, 200],
       "hidden_size":256,
-      "n_food":2
+      "n_food":2,
+      "kill_food":5
 
     },
     {
@@ -42,7 +44,8 @@
       "eps":80,
       "eps_range":[0, 200],
       "hidden_size":256,
-      "n_food":1
+      "n_food":1,
+      "kill_food":-1
 
     }
   ],

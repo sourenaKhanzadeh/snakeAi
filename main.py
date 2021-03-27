@@ -85,6 +85,13 @@ class Game:
                     record = score
                 #     agent.model.save()
 
+                # after n_generation start taking food away
+                if agent.n_games > (pars.get('kill_food', None) or KILL_FOOD_N_GEN):
+                    kill_food = pars.get('kill_food', None)
+                    if kill_food and kill_food > 1:
+                        if game.n_food > 1:
+                            game.n_food -= 1
+
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
 

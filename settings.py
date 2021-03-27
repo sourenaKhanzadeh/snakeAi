@@ -21,6 +21,7 @@ SCREEN_HEIGHT = set_size(WINDOW_N_Y) or set_size(DEFAULT_WINDOW_SIZES[1])
 
 DEFAULT_SPEED = 40
 DEFAULT_N_FOOD = 1
+KILL_FOOD_N_GEN = 10
 
 # Neural Networks Configuration
 HIDDEN_SIZE = 256
