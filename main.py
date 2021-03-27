@@ -8,8 +8,9 @@ import os
 
 class Windows(Enum):
     W1 = (20, 20, 3, 1)
-    W2 = (10, 10, 2, 1)
+    W2 = (10, 10, 2, 2)
     W3 = (30, 30, 1, 1)
+    W4 = (10, 10, 3, 3)
 
 
 class Game:
@@ -27,11 +28,23 @@ class Game:
                         'empty_cell':0,
                         'col_wall':-10,
                         'loop':-10,
-                        'scored':10
+                        'scored':10,
+                        'gamma':0.9,
+                        'eps':80,
+                        'eps_range':(0, 200)
 
                     },
+                    {
+                        'empty_cell':0,
+                        'col_wall':-10,
+                        'loop':-20,
+                        'scored':30
+
+                    }
 
                 ]
+            elif window.name == "W2":
+                pass
             else:
                 # use default
                 pars = [{}]
@@ -42,10 +55,10 @@ class Game:
                 index = 0
                 for i in range(k):
                     for j in range(l):
-                        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (400+(n+m)*2*i,100+(n+m)*2*j)
-                        if len(pars) > 0:
+                        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (100+(n+m)*i,100+(n+m)*j)
+                        if index < len(pars) and len(pars) > 0:
                             p  = Process(target=self.train, args=(n, m, pars[index]))
-                        elif len(pras) >= index:
+                        elif len(pars) >= index:
                             p  = Process(target=self.train, args=(n, m, {}))
                         else:
                             p  = Process(target=self.train, args=(n, m, pars[0]))
@@ -93,4 +106,4 @@ class Game:
 
 
 if __name__ == "__main__":
-    g = Game(3)
+    g = Game(4)
