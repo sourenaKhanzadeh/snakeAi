@@ -21,24 +21,45 @@ class Game:
     def awake(self):
         processes = []
         for window in Windows:
+            if window.name == "W1":
+                pars = [
+                    {
+                        'empty_cell':0,
+                        'col_wall':-10,
+                        'loop':-10,
+                        'scored':10
+
+                    },
+
+                ]
+            else:
+                # use default
+                pars = [{}]
+
             if window.name == "W" + str(self.lv):
                 n, m, k, l = window.value
                 n, m = (set_size(n), set_size(m))
+                index = 0
                 for i in range(k):
                     for j in range(l):
                         os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (400+(n+m)*2*i,100+(n+m)*2*j)
-                        p  = Process(target=self.train, args=(n, m))
+                        if len(pars) > 0:
+                            p  = Process(target=self.train, args=(n, m, pars[index]))
+                        else:
+                            p  = Process(target=self.train, args=(n, m, pars[0]))
                         p.start()
                         processes.append(p)
+                        index += 1
                 break
         for p in processes:
             p.join()
 
 
-    def train(self, n, m):
+    def train(self, n, m, pars):
         record = 0
         game = Snake(n, m)
         agent = Agent(game)
+
         while True:
             # get old state
             state_old = game.get_state()
@@ -47,7 +68,7 @@ class Game:
             final_move = agent.get_action(state_old)
 
             # perform move and get new state
-            reward, done, score = game.play_step(final_move)
+            reward, done, score = game.play_step(final_move, pars)
             state_new = game.get_state()
 
             # train short memory

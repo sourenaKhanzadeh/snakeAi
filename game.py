@@ -115,7 +115,7 @@ class Snake:
 
         return np.array(state, dtype=int)
 
-    def play_step(self, action):
+    def play_step(self, action, kwargs={None:None}):
         self.frame += 1
 
         # Quit out of the game
@@ -136,24 +136,24 @@ class Snake:
         self.body.insert(0, self.head)
 
 
-        reward = DefaultImediateReward.EMPTY_CELL.value
+        reward = kwargs.get('empty_cell', None) or DefaultImediateReward.EMPTY_CELL.value
         terminal = False
 
         if self.collision():
             terminal = True
-            reward = DefaultImediateReward.COLLISION_WALL.value
+            reward = kwargs.get('col_wall', None) or DefaultImediateReward.COLLISION_WALL.value
             return reward, terminal, self.score
 
         if self.frame > 100*len(self.body):
             terminal = True
-            reward = DefaultImediateReward.LOOP.value
+            reward = kwargs.get('loop', None) or DefaultImediateReward.LOOP.value
             return reward, terminal, self.score
 
 
         if self.head == self.food:
             self.score += 1
             self.le += 1
-            reward = DefaultImediateReward.SCORED.value
+            reward = kwargs.get('scored', None) or DefaultImediateReward.SCORED.value
             self.gen_food()
         else:
             self.body.pop()
