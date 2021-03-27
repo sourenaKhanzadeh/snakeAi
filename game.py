@@ -43,6 +43,7 @@ class Snake:
 
         self.reset()
         self.frame = 0
+        self.n_food = DEFAULT_N_FOOD
 
 
     def reset(self):

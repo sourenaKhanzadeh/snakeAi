@@ -15,6 +15,7 @@ SCREEN_WIDTH = set_size(WINDOW_N_X) or set_size(DEFAULT_WINDOW_SIZES[0])
 SCREEN_HEIGHT = set_size(WINDOW_N_Y) or set_size(DEFAULT_WINDOW_SIZES[1])
 
 DEFAULT_SPEED = 40
+DEFAULT_N_FOOD = 1
 
 # Neural Networks Configuration
 HIDDEN_SIZE = 256
@@ -29,4 +30,4 @@ GAMMA = 0.9
 EPSILON = 80
 
 EPS_RANGE = (0, 200)
-is_random_move = lambda eps: random.randint(EPS_RANGE[0], EPS_RANGE[1]) < eps
+is_random_move = lambda eps, eps_range: random.randint(eps_range[0], eps_range[1]) < eps

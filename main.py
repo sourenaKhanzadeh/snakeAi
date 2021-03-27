@@ -45,6 +45,8 @@ class Game:
                         os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (400+(n+m)*2*i,100+(n+m)*2*j)
                         if len(pars) > 0:
                             p  = Process(target=self.train, args=(n, m, pars[index]))
+                        elif len(pras) >= index:
+                            p  = Process(target=self.train, args=(n, m, {}))
                         else:
                             p  = Process(target=self.train, args=(n, m, pars[0]))
                         p.start()

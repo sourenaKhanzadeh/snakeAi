@@ -8,12 +8,14 @@ from settings import *
 
 class Agent:
 
-    def __init__(self, game):
+    def __init__(self, game, pars=dict()):
         self.n_games = 0
         self.epsilon = EPSILON # randomness
-        self.gamma = GAMMA # discount rate
+        self.eps = pars.get('eps', None) or EPSILON
+        self.gamma = pars.get('gamma', None) or GAMMA # discount rate
+        self.eps_range = pars.get('eps_range', None) or EPS_RANGE
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(len(game.get_state()), HIDDEN_SIZE, OUTPUT_SIZE)
+        self.model = Linear_QNet(len(game.get_state()), pars.get('hidden_size', None) or HIDDEN_SIZE, OUTPUT_SIZE)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
         self.game = game
@@ -37,9 +39,9 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = EPSILON - self.n_games
+        self.epsilon = self.eps - self.n_games
         final_move = [0,0,0]
-        if is_random_move(self.epsilon):
+        if is_random_move(self.epsilon, self.eps_range):
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
