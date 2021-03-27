@@ -5,6 +5,7 @@ from enum import Enum
 import multiprocessing as mp
 from multiprocessing import Pool, Process
 import os
+import json
 
 class Windows(Enum):
     W1 = (20, 20, 3, 1)
@@ -21,30 +22,15 @@ class Game:
 
     def awake(self):
         processes = []
+
+        file = open('par_lev.json', 'r')
+        json_pars = json.load(file)
+        file.close()
+
         for window in Windows:
-            if window.name == "W1":
-                pars = [
-                    {
-                        'empty_cell':0,
-                        'very_far_range':0,
-                        'close_range':0,
-                        'far_range':0,
-                        'col_wall':-10,
-                        'loop':-10,
-                        'scored':10,
-                        'gamma':0.9,
-                        'eps':80,
-                        'eps_range':(0, 200),
-                        'hidden_size':256
 
-                    }
+            pars = json_pars.get(window.name, None) or [{}]
 
-                ]
-            elif window.name == "W2":
-                pass
-            else:
-                # use default
-                pars = [{}]
 
             if window.name == "W" + str(self.lv):
                 n, m, k, l = window.value
