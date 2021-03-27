@@ -55,7 +55,7 @@ class Game:
 
     def train(self, n, m, pars):
         record = 0
-        game = Snake(n, m)
+        game = Snake(n, m, pars.get('n_food', None))
         agent = Agent(game)
 
         while True:
@@ -89,4 +89,4 @@ class Game:
 
 
 if __name__ == "__main__":
-    g = Game(3)
+    g = Game(1)

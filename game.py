@@ -29,7 +29,7 @@ class DefaultImediateReward(Enum):
 class Snake:
     TITLE = "Snake Game"
 
-    def __init__(self, w=SCREEN_WIDTH, h=SCREEN_HEIGHT):
+    def __init__(self, w=SCREEN_WIDTH, h=SCREEN_HEIGHT, n_food=None):
         self.size = SIZE
         self.speed = DEFAULT_SPEED
 
@@ -43,8 +43,7 @@ class Snake:
 
         self.reset()
         self.frame = 0
-        self.n_food = DEFAULT_N_FOOD
-
+        self.n_food = n_food or DEFAULT_N_FOOD
 
     def reset(self):
         self.dir = Dir.R
@@ -54,7 +53,7 @@ class Snake:
 
         self.score = 0
         self.le = 3
-        self.food = None
+        self.food = []
 
         self.gen_food()
         self.frame = 0
@@ -63,14 +62,15 @@ class Snake:
          x = random.randint(0, (self.w-self.size )//self.size )*self.size
          y = random.randint(0, (self.h-self.size )//self.size )*self.size
 
-         self.food = (x, y)
-         if self.food in self.body:
+         self.food.append((x, y))
+         if self.food[-1] in self.body:
              self.gen_food()
 
 
     def get_state(self):
-        x, y = head = self.body[0]
-        fx, fy = self.food
+        x, y = self.head
+        fx, fy = zip(*self.food)
+        fx, fy = np.array(fx), np.array(fy)
 
         point_l = (x - self.size, y)
         point_r = (x + self.size, y)
@@ -108,16 +108,20 @@ class Snake:
             dir_d,
 
             # Food location
-            fx < x,  # food left
-            fx > x,  # food right
-            fy < y,  # food up
-            fy > y  # food down
+            any(fx < x),  # food left
+            any(fx > x),  # food right
+            any(fy < y),  # food up
+            any(fy > y)  # food down
             ]
 
         return np.array(state, dtype=int)
 
     def play_step(self, action, kwargs={None:None}):
         self.frame += 1
+
+        # pop food if more than maximum
+        if len(self.food) < self.n_food:
+            self.gen_food()
 
         # Quit out of the game
         for ev in pygame.event.get():
@@ -150,26 +154,28 @@ class Snake:
             reward = kwargs.get('loop', None) or DefaultImediateReward.LOOP.value
             return reward, terminal, self.score
 
+        for fx, fy in self.food:
+            if self.head == (fx, fy):
+                self.score += 1
+                self.le += 1
+                reward = kwargs.get('scored', None) or DefaultImediateReward.SCORED.value
+                del self.food[self.food.index((fx, fy))]
+                self.gen_food()
 
-        if self.head == self.food:
-            self.score += 1
-            self.le += 1
-            reward = kwargs.get('scored', None) or DefaultImediateReward.SCORED.value
-            self.gen_food()
-        else:
+        if len(self.body) > self.le:
             self.body.pop()
 
         self.update()
         self.clock.tick(self.speed)
 
-        distance = self.distance()//self.size # distance in tiles
+        distance = np.array(self.distance())//self.size # distance in tiles
 
         # close
-        if distance in range(CLOSE_RANGE[0], CLOSE_RANGE[1]):
+        if any(CLOSE_RANGE[0] <= distance) and  any(distance < CLOSE_RANGE[1]):
             reward = kwargs.get('close_range', None) or DefaultImediateReward.CLOSE_TO_FOOD.value
             return reward, terminal, self.score
         # far
-        elif distance in range(FAR_RANGE[0], FAR_RANGE[1]):
+        elif any(FAR_RANGE[0] <= distance) and any(distance <FAR_RANGE[1]):
             reward = kwargs.get('far_range', None) or DefaultImediateReward.FAR_FROM_FOOD.value
             return reward, terminal, self.score
 
@@ -179,13 +185,15 @@ class Snake:
     def draw(self):
         for x, y in self.body:
             pygame.draw.rect(self.screen, Color('red'), (x, y, self.size, self.size))
-        x, y = self.food
-        pygame.draw.rect(self.screen, Color('black'), (x, y, self.size, self.size))
+        for x, y in self.food:
+            pygame.draw.rect(self.screen, Color('black'), (x, y, self.size, self.size))
 
     def distance(self):
-        fx, fy = self.food
+        dists = []
         x, y = self.head
-        return ((fx - x)**2 + (fy - y)**2)**0.5
+        for fx, fy in self.food:
+            dists.append(((fx - x)**2 + (fy - y)**2)**0.5)
+        return dists
 
     def update(self):
         self.screen.fill(Color('white'))
