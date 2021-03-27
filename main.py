@@ -26,19 +26,16 @@ class Game:
                 pars = [
                     {
                         'empty_cell':0,
+                        'very_far_range':0,
+                        'close_range':0,
+                        'far_range':0,
                         'col_wall':-10,
                         'loop':-10,
                         'scored':10,
                         'gamma':0.9,
                         'eps':80,
-                        'eps_range':(0, 200)
-
-                    },
-                    {
-                        'empty_cell':0,
-                        'col_wall':-10,
-                        'loop':-20,
-                        'scored':30
+                        'eps_range':(0, 200),
+                        'hidden_size':256
 
                     }
 
@@ -98,12 +95,12 @@ class Game:
                 agent.n_games += 1
                 agent.train_long_memory()
 
-                # if score > record:
-                #     record = score
+                if score > record:
+                    record = score
                 #     agent.model.save()
 
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
 
 if __name__ == "__main__":
-    g = Game(4)
+    g = Game(3)

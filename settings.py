@@ -1,6 +1,11 @@
 import random
 
+# snake size
 SIZE = 20
+
+# ranges for defining close and far
+CLOSE_RANGE = (0, 2)
+FAR_RANGE = (CLOSE_RANGE[1], 9)
 
 set_size  = lambda x: SIZE * x
 

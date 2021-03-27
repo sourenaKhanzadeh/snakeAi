@@ -137,7 +137,7 @@ class Snake:
         self.body.insert(0, self.head)
 
 
-        reward = kwargs.get('empty_cell', None) or DefaultImediateReward.EMPTY_CELL.value
+        reward = kwargs.get('very_far_range', None) or DefaultImediateReward.VERY_FAR_FROM_FOOD.value
         terminal = False
 
         if self.collision():
@@ -162,6 +162,18 @@ class Snake:
         self.update()
         self.clock.tick(self.speed)
 
+        distance = self.distance()//self.size # distance in tiles
+
+        # close
+        if distance in range(CLOSE_RANGE[0], CLOSE_RANGE[1]):
+            reward = kwargs.get('close_range', None) or DefaultImediateReward.CLOSE_TO_FOOD.value
+            return reward, terminal, self.score
+        # far
+        elif distance in range(FAR_RANGE[0], FAR_RANGE[1]):
+            reward = kwargs.get('far_range', None) or DefaultImediateReward.FAR_FROM_FOOD.value
+            return reward, terminal, self.score
+
+        # very far
         return reward, terminal, self.score
 
     def draw(self):
@@ -169,6 +181,11 @@ class Snake:
             pygame.draw.rect(self.screen, Color('red'), (x, y, self.size, self.size))
         x, y = self.food
         pygame.draw.rect(self.screen, Color('black'), (x, y, self.size, self.size))
+
+    def distance(self):
+        fx, fy = self.food
+        x, y = self.head
+        return ((fx - x)**2 + (fy - y)**2)**0.5
 
     def update(self):
         self.screen.fill(Color('white'))
