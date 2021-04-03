@@ -6,9 +6,10 @@ import multiprocessing as mp
 from multiprocessing import Pool, Process
 import os
 import json
+import random
 
 class Windows(Enum):
-    W1 = (20, 20, 1, 1)
+    W1 = (20, 20, 3, 1)
     W2 = (10, 10, 2, 2)
     W3 = (30, 30, 1, 1)
     W4 = (10, 10, 3, 3)
@@ -85,12 +86,10 @@ class Game:
                     record = score
                     #agent.model.save()
 
-                # after n_generation start taking food away
-                kill_food = pars.get('kill_food', None) or KILL_FOOD_N_GEN
-
-                if agent.n_games > kill_food:
-                    if (kill_food > 1) and (game.n_food > 1):
-                        game.n_food -= 1
+                # Takes away food by random probability
+                decrease_probability = pars.get('decrease_food_chance', None) or DECREASE_FOOD_CHANCE
+                if (game.n_food > 1) and (random.random() < decrease_probability):
+                    game.n_food -= 1
 
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
