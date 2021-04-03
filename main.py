@@ -9,10 +9,10 @@ import json
 import random
 
 class Windows(Enum):
-    W1 = (20, 20, 3, 1)
+    W1 = (5, 5, 1, 1)
     W2 = (10, 10, 2, 2)
     W3 = (30, 30, 1, 1)
-    W4 = (10, 10, 3, 3)
+    W4 = (20, 20, 1, 1)
 
 
 class Game:
@@ -52,7 +52,11 @@ class Game:
                 break
         for p in processes:
             p.join()
-
+    
+    def save_to_file(self, path, game_num, score, record):
+        file = open(path, "a+")
+        file.write("%s %s %s\n" % (game_num, score, record))
+        file.close()
 
     def train(self, n, m, pars):
         record = 0
@@ -77,7 +81,6 @@ class Game:
             agent.remember(state_old, final_move, reward, state_new, done)
 
             if done:
-                # train long memory, plot result
                 game.reset()
                 agent.n_games += 1
                 agent.train_long_memory()
@@ -86,13 +89,13 @@ class Game:
                     record = score
                     #agent.model.save()
 
-                # Takes away food by random probability
+                # Takes away food depending on given probability
                 decrease_probability = pars.get('decrease_food_chance', None) or DECREASE_FOOD_CHANCE
                 if (game.n_food > 1) and (random.random() < decrease_probability):
                     game.n_food -= 1
 
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
-
-
+                self.save_to_file("graphs/test.txt", agent.n_games, score, record)    
+     
 if __name__ == "__main__":
-    g = Game(1)
+    g = Game(4)
