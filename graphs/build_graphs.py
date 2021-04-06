@@ -12,7 +12,7 @@ if __name__ == "__main__":
    score = []
    record = []
 
-   file = open('test.txt')
+   file = open('default_parameters_20x20grid.txt')
    for row in file:
       row = row.split(' ')
       game_num.append(int(row[0]))
