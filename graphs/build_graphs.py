@@ -1,72 +1,40 @@
+import numpy as np
+#import pandas as pd
+#import seaborn as sb
 import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure
-import numpy as np 
-import math
-
-def build_Score_Graph(title):
-   # Change size of plot (in inches)
-   figure(figsize=(11, 7), dpi=100)
-
-   plt.plot(game_num, score)
-
-   #plt.ylim([0,5])
-
-   pfit = np.polyfit(game_num, score, 1)
-   trend_line_model = np.poly1d(pfit)
-   plt.plot(trend_line_model(game_num), label="Trend line")
-
-   plt.xlabel('Game Number', fontsize=12)
-   plt.ylabel('Score', fontsize=12)
-
-   plt.title(title, fontsize=20)
-   plt.legend()
-   plt.show()
-
-def build_Cumulative_Score_Graph(title):
-   # Change size of plot (in inches)
-   figure(figsize=(11, 7), dpi=100)
-
-   plt.plot(game_num, cumulativeScore)
-
-   plt.xlabel('Game Number', fontsize=12)
-   plt.ylabel('Cumulative Score', fontsize=12)
-
-   plt.title(title, fontsize=20)
-   plt.show()
-
-def build_Record_Graph(title):
-   # Change size of plot (in inches)
-   figure(figsize=(11, 7), dpi=100)
-
-   plt.plot(game_num, record)
-
-   plt.xlabel('Game Number', fontsize=12)
-   plt.ylabel('Record Score', fontsize=12)
-
-   plt.title(title, fontsize=20)
-   plt.show()
+plt.style.use('ggplot')
 
 if __name__ == "__main__":
+   #data = pd.read_csv('test.txt', sep=" ", header=None)
+   #data.columns = ["game_num", "score", "record"]
+
    game_num = []
    score = []
    record = []
 
-   file = open('random_policy.txt')
+   file = open('test.txt')
    for row in file:
       row = row.split(' ')
       game_num.append(int(row[0]))
       score.append(int(row[1]))
       record.append(int(row[2]))
+   file.close()
 
    cumulativeScore = np.cumsum(score)
+   
+   fig = plt.figure()
+   fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
+   
+   ax[0].set_title('Trained Model')
 
-   #scoreDividedByGame = []
-   #for i in range(len(game_num)):
-   #   scoreDividedByGame.append(score[i] / game_num[i])
-      
-   # For some reason you have to exit out of one graph to see the next one
-   build_Score_Graph('Random Policy (no training)')
-   build_Cumulative_Score_Graph('Random Policy (no training)')
-   build_Record_Graph('Random Policy (no training)')
+   ax[0].plot(score)
+   ax[0].set_ylabel("Score", fontsize=10)
 
+   ax[1].plot(cumulativeScore)
+   ax[1].set_ylabel("Cumul. Score", fontsize=10)
 
+   ax[2].plot(record)
+   ax[2].set_ylabel("Record", fontsize=10)
+   ax[2].set_xlabel("Game Number", fontsize=10)
+
+   plt.show()
