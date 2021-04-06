@@ -1,39 +1,44 @@
 import numpy as np
-#import pandas as pd
-#import seaborn as sb
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-if __name__ == "__main__":
-   #data = pd.read_csv('test.txt', sep=" ", header=None)
-   #data.columns = ["game_num", "score", "record"]
+def moving_average(arr, window_size):
+   newarr = arr[:window_size]
+   for i in range(len(arr) - window_size + 1):
+      window = arr[i : i+window_size]
+      window_average = sum(window) / window_size
+      newarr.append(window_average)
+   return newarr
 
-   game_num = []
-   score = []
-   record = []
+if __name__ == "__main__":
+   scoreList = []
+   recordList = []
 
    file = open('default_parameters_20x20grid.txt')
    for row in file:
       row = row.split(' ')
-      game_num.append(int(row[0]))
-      score.append(int(row[1]))
-      record.append(int(row[2]))
+      scoreList.append(int(row[1]))
+      recordList.append(int(row[2]))
    file.close()
 
-   cumulativeScore = np.cumsum(score)
-   
+   #cumulativeScoreList = np.cumsum(scoreList)
+   windowSize = 20
+   movingAverageList = moving_average(scoreList, windowSize)
+
    fig = plt.figure()
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
-   ax[0].set_title('Trained Model')
+   ax[0].set_title('Default Parameters 20x20 Grid')
 
-   ax[0].plot(score)
+   ax[0].plot(scoreList)
    ax[0].set_ylabel("Score", fontsize=10)
 
-   ax[1].plot(cumulativeScore)
-   ax[1].set_ylabel("Cumul. Score", fontsize=10)
+   #ax[1].plot(cumulativeScore)
+   #ax[1].set_ylabel("Cumul. Score", fontsize=10)
+   ax[1].plot(movingAverageList)
+   ax[1].set_ylabel("Score \nMov. Avg = " + str(windowSize), fontsize=10)
 
-   ax[2].plot(record)
+   ax[2].plot(recordList)
    ax[2].set_ylabel("Record", fontsize=10)
    ax[2].set_xlabel("Game Number", fontsize=10)
 
