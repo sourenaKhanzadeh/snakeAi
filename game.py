@@ -244,6 +244,7 @@ class Snake:
 
         # if len(self.body) > self.le:
             # self.body.pop()
+            
     def control(self):
         keys = pygame.key.get_pressed()
 
