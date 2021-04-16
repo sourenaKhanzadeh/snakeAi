@@ -9,7 +9,7 @@ import json
 import random
 
 class Windows(Enum):
-    W1 = (5, 5, 1, 1)
+    W1 = (20, 20, 1, 3)
     W2 = (10, 10, 2, 2)
     W3 = (30, 30, 1, 1)
     W4 = (20, 20, 1, 1)
@@ -100,7 +100,7 @@ class Game:
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
                 # appends game information to txt filen at specified path
-                self.save_to_file("graphs/test.txt", agent.n_games, score, record)    
+                self.save_to_file(f"graphs/{pars.get('graph', 'test')}.txt", agent.n_games, score, record)    
      
 if __name__ == "__main__":
-    g = Game(4)
+    g = Game(1)
