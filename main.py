@@ -53,6 +53,8 @@ class Game:
         for p in processes:
             p.join()
     
+    # save run stats to a txt file at a specified path
+    # txt files are used by build_graphs.py to build graphs
     def save_to_file(self, path, game_num, score, record):
         file = open(path, "a+")
         file.write("%s %s %s\n" % (game_num, score, record))
@@ -89,12 +91,15 @@ class Game:
                     record = score
                     #agent.model.save()
 
-                # Takes away food depending on given probability
+                # takes away food depending on given probability, up until 1 food remains
                 decrease_probability = pars.get('decrease_food_chance', None) or DECREASE_FOOD_CHANCE
                 if (game.n_food > 1) and (random.random() < decrease_probability):
                     game.n_food -= 1
 
+                # prints game information to console
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
+
+                # appends game information to txt filen at specified path
                 self.save_to_file("graphs/test.txt", agent.n_games, score, record)    
      
 if __name__ == "__main__":

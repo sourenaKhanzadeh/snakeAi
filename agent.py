@@ -37,7 +37,7 @@ class Agent:
         self.trainer.train_step(state, action, reward, next_state, done)
 
     def get_action(self, state):
-        # random moves: tradeoff exploration / exploitation
+        # tradeoff exploration / exploitation based on epsilon and eps_range
         self.epsilon = self.eps - self.n_games
         final_move = [0,0,0]
         if is_random_move(self.epsilon, self.eps_range):

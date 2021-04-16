@@ -25,7 +25,6 @@ class DefaultImediateReward(Enum):
     EMPTY_CELL = 0
 
 
-
 class Snake:
     TITLE = "Snake Game"
 
@@ -35,7 +34,6 @@ class Snake:
 
         self.w = w
         self.h = h
-
 
         self.screen = pygame.display.set_mode((w, h))
         pygame.display.set_caption(Snake.TITLE)
@@ -59,14 +57,16 @@ class Snake:
         self.frame = 0
 
     def gen_food(self):
-         x = random.randint(0, (self.w-self.size )//self.size )*self.size
-         y = random.randint(0, (self.h-self.size )//self.size )*self.size
+        x = random.randint(0, (self.w-self.size )//self.size )*self.size
+        y = random.randint(0, (self.h-self.size )//self.size )*self.size
 
-         self.food.append((x, y))
-         if self.food[-1] in self.body:
-             self.gen_food()
+        self.food.append((x, y))
+        if self.food[-1] in self.body:
+            self.gen_food()
 
-
+    # state is a boolean array of size 11
+    # state description: [danger straight, danger right, danger left, dir_l, dir_r, dir_u, dir_d, food left, food right, food up, food down]
+    # example state: [True, True, True, False, False, True, False, True, False, False, True]
     def get_state(self):
         x, y = self.head
         fx, fy = zip(*self.food)
@@ -111,9 +111,9 @@ class Snake:
             any(fx < x),  # food left
             any(fx > x),  # food right
             any(fy < y),  # food up
-            any(fy > y)  # food down
+            any(fy > y)   # food down
             ]
-
+                
         return np.array(state, dtype=int)
 
     def play_step(self, action, kwargs={None:None}):
@@ -170,11 +170,11 @@ class Snake:
 
         distance = np.array(self.distance())//self.size # distance in tiles
 
-        # close
+        # food close to snake head
         if any(CLOSE_RANGE[0] <= distance) and  any(distance < CLOSE_RANGE[1]):
             reward = kwargs.get('close_range', None) or DefaultImediateReward.CLOSE_TO_FOOD.value
             return reward, terminal, self.score
-        # far
+        # food far to snake head
         elif any(FAR_RANGE[0] <= distance) and any(distance <FAR_RANGE[1]):
             reward = kwargs.get('far_range', None) or DefaultImediateReward.FAR_FROM_FOOD.value
             return reward, terminal, self.score
@@ -242,8 +242,6 @@ class Snake:
 
         self.head = (x, y)
 
-        # if len(self.body) > self.le:
-            # self.body.pop()
             
     def control(self):
         keys = pygame.key.get_pressed()
@@ -272,10 +270,6 @@ class Snake:
 
         else:
             action = np.array([1, 0, 0])
-        # if keys[K_UP]:
-        #     self.dir = Dir.U
-        # if keys[K_DOWN]:
-        #     self.dir = Dir.D
 
         return action
 
