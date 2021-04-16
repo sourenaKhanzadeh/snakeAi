@@ -13,7 +13,7 @@ class Agent:
         self.eps = pars.get('eps', EPSILON)
         self.gamma = pars.get('gamma', GAMMA) # discount rate
         self.eps_range = pars.get('eps_range', EPS_RANGE)
-        print(self.gamma)
+        print(self.epsilon ,self.eps)
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
         self.model = Linear_QNet(len(game.get_state()), pars.get('hidden_size', HIDDEN_SIZE), OUTPUT_SIZE)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
