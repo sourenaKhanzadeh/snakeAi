@@ -148,21 +148,21 @@
   "W10":[
     {
       "is_dir":true,
-      "moving_closer":1,
-      "moving_away":-1,  
-      "graph":"dir_closer__1_away___1_0"
+      "moving_closer":10,
+      "moving_away":-10,  
+      "graph":"dir_closer__10_away___10_0"
     },
     {
       "is_dir":true,
-      "moving_closer":5,
-      "moving_away":-5,  
-      "graph":"dir_closer__1_away___1_1"
+      "moving_closer":10,
+      "moving_away":-10,  
+      "graph":"dir_closer__10_away___10_1"
     },
     {
       "is_dir":true,
-      "moving_closer":5,
-      "moving_away":-5,  
-      "graph":"dir_closer__1_away___1_2"
+      "moving_closer":10,
+      "moving_away":-10,  
+      "graph":"dir_closer__10_away___10_2"
     }
   ]
 }
