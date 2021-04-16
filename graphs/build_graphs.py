@@ -16,7 +16,7 @@ if __name__ == "__main__":
    for i in range(3):
       scoreList = []
       recordList = []
-      file = open(f'eps__0_20x20_{i}.txt')
+      file = open(f'food__20_decay__0_30_20x20_{i}.txt')
       j = 0
       for row in file:
          
@@ -55,7 +55,7 @@ if __name__ == "__main__":
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
    # Title
-   ax[0].set_title('EPS: 0')
+   ax[0].set_title('FOOD: 20, DECAY: 0.3')
 
    # Score plot
    ax[0].plot(score)

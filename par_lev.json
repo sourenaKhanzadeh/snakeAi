@@ -98,5 +98,22 @@
       "eps":0,
       "graph":"eps__0_20x20_2"
     }
+  ],
+  "W8":[
+    {
+      "n_food":20,
+      "decrease_food_chance":0.3,
+      "graph":"food__20_decay__0_30_20x20_0"
+    },
+    {
+      "n_food":20,
+      "decrease_food_chance":0.3,
+      "graph":"food__20_decay__0_30_20x20_1"
+    },
+    {
+      "n_food":20,
+      "decrease_food_chance":0.3,
+      "graph":"food__20_decay__0_30_20x20_2"
+    }
   ]
 }
