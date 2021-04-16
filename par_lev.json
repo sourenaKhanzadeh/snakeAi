@@ -167,22 +167,22 @@
   ],
   "W11":[
     {
-      "col_wall":-30,
-      "loop":-30,
-      "scored":30,
-      "graph":"col___30_loop___30_score__30_0"
+      "col_wall":-1,
+      "loop":-1,
+      "scored":1,
+      "graph":"col___1_loop___1_score__1_0"
     },
     {
-      "col_wall":-30,
-      "loop":-30,
-      "scored":30,
-      "graph":"col___30_loop___30_score__30_1"
+      "col_wall":-1,
+      "loop":-1,
+      "scored":1,
+      "graph":"col___1_loop___1_score__1_1"
     },
     {
-      "col_wall":-30,
-      "loop":-30,
-      "scored":30,
-      "graph":"col___30_loop___30_score__30_2"
+      "col_wall":-1,
+      "loop":-1,
+      "scored":1,
+      "graph":"col___1_loop___1_score__1_2"
     }
   ]
 }

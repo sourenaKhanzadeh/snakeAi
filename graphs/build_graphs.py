@@ -16,7 +16,7 @@ if __name__ == "__main__":
    for i in range(3):
       scoreList = []
       recordList = []
-      file = open(f'col___30_loop___30_score__30_{i}.txt')
+      file = open(f'col___5_loop___5_score__5_{i}.txt')
       j = 0
       for row in file:
          
@@ -55,7 +55,7 @@ if __name__ == "__main__":
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
    # Title
-   ax[0].set_title('coll: -30, score: 30')
+   ax[0].set_title('coll: -5, score: 5')
 
    # Score plot
    ax[0].plot(score)
