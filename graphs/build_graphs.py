@@ -16,7 +16,7 @@ if __name__ == "__main__":
    for i in range(3):
       scoreList = []
       recordList = []
-      file = open(f'gamma__0_5_WIN_20x20_{i}.txt')
+      file = open(f'gamma__0_0_WIN_20x20_{i}.txt')
       j = 0
       for row in file:
          row = row.split(' ')
@@ -53,7 +53,7 @@ if __name__ == "__main__":
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
    # Title
-   ax[0].set_title('GAMMA: 0.5')
+   ax[0].set_title('GAMMA: 0.0')
 
    # Score plot
    ax[0].plot(score)

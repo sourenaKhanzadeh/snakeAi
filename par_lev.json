@@ -31,7 +31,21 @@
     }    
   ],
   "W3":[
-    {}
+    {
+      "gamma":0.99,
+      "graph":"gamma__0_99_WIN_20x20_0",
+      "num_games":300
+    },
+    {
+      "gamma":0.99,
+      "graph":"gamma__0_99_WIN_20x20_1",
+      "num_games":300
+    },
+    {
+      "gamma":0.99,
+      "graph":"gamma__0_99_WIN_20x20_2",
+      "num_games":300
+    }    
   ],
   "W4":[
     {
