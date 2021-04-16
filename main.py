@@ -11,8 +11,9 @@ import random
 class Windows(Enum):
     W1 = (20, 20, 1, 3)
     # W2 = (20, 20, 3, 1)
-    W5 = (20, 20, 3, 1)
+    # W5 = (20, 20, 3, 1)
     W4 = (20, 20, 1, 1)
+    W6 = (20, 20, 3, 1)
 
 
 class Game:
@@ -110,4 +111,4 @@ class Game:
 if __name__ == "__main__":
     # for i in range(2, 3):
         # Game(i)
-    Game(5)
+    Game(6)

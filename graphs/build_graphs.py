@@ -16,7 +16,7 @@ if __name__ == "__main__":
    for i in range(3):
       scoreList = []
       recordList = []
-      file = open(f'gamma__0_99_WIN_20x20_{i}.txt')
+      file = open(f'default_20x20_{i}.txt')
       j = 0
       for row in file:
          
@@ -55,12 +55,12 @@ if __name__ == "__main__":
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
    # Title
-   ax[0].set_title('GAMMA: 0.0')
+   ax[0].set_title('Default')
 
    # Score plot
    ax[0].plot(score)
    ax[0].set_ylabel("Score", fontsize=10)
-   ax[0].set_ylim([0,100])   #y-axis for trained policies
+   ax[0].set_ylim([0,50])   #y-axis for trained policies
    # ax[0].set_ylim([0, 5])    #y-axis for no policy
 
    # Moving average plot
@@ -73,7 +73,7 @@ if __name__ == "__main__":
    ax[2].plot(rec)
    ax[2].set_ylabel("Record", fontsize=10)
    ax[2].set_xlabel("Game Number", fontsize=10)
-   ax[2].set_ylim([0,100])   #y-axis for trained policies
+   # ax[2].set_ylim([0,50])   #y-axis for trained policies
    # ax[2].set_ylim([0, 5])    #y-axis for no policy
 
    plt.show()

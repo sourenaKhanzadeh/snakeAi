@@ -37,7 +37,6 @@
   "W5":[
     {
       "gamma":0.99,
-      "eps":0,
       "graph":"gamma__0_99_WIN_20x20_0",
       "num_games":300
     },
@@ -72,6 +71,18 @@
       "kill_frame":100,
       "num_games":-1,
       "graph":"gamma__0_5_WIN_20x20"
+    }
+  ], 
+  "W6":[
+    {
+      "graph":"default_20x20_0"
+    },
+    {
+      "graph":"default_20x20_1"
+    },
+    
+    {
+      "graph":"default_20x20_2"
     }
   ]
 }
