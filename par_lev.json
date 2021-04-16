@@ -17,17 +17,17 @@
     {
       "gamma":0.5,
       "graph":"gamma__0_5_WIN_20x20_0",
-      "num_games":10
+      "num_games":300
     },
     {
       "gamma":0.5,
       "graph":"gamma__0_5_WIN_20x20_1",
-      "num_games":10
+      "num_games":300
     },
     {
       "gamma":0.5,
       "graph":"gamma__0_5_WIN_20x20_2",
-      "num_games":10
+      "num_games":300
     }    
   ],
   "W3":[

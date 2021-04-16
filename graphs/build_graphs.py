@@ -53,7 +53,7 @@ if __name__ == "__main__":
    fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
    
    # Title
-   ax[0].set_title('GAMMA: 0.0')
+   ax[0].set_title('GAMMA: 0.5')
 
    # Score plot
    ax[0].plot(score)
