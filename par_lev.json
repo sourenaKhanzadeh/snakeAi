@@ -48,6 +48,8 @@
       "hidden_size":256,
       "n_food":1,
       "decrease_food_chance":-1,
+      "kill_frame":100,
+      "num_games":-1,
       "graph":"gamma__0_5_WIN_20x20"
     }
   ]
