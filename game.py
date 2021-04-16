@@ -23,6 +23,8 @@ class DefaultImediateReward(Enum):
     MID_TO_FOOD = 0
     VERY_FAR_FROM_FOOD = 0
     EMPTY_CELL = 0
+    DEFAULT_MOVING_CLOSER = 0
+    MOVING_AWAY = 0
 
 
 class Snake:
@@ -178,6 +180,29 @@ class Snake:
         elif any(FAR_RANGE[0] <= distance) and any(distance <FAR_RANGE[1]):
             reward = kwargs.get('far_range', DefaultImediateReward.FAR_FROM_FOOD.value) 
             return reward, terminal, self.score
+
+        if kwargs.get('is_dir', False):
+            for fx, fy in self.food:
+                x, y = self.head
+                if self.dir == Dir.R or self.dir == Dir.L:
+                    if  x > fx and self.dir == Dir.R:
+                        reward = kwargs.get("moving_away", DefaultImediateReward.MOVING_AWAY.value) # moving closer
+                    if x < fx and self.dir == Dir.L:
+                        reward = kwargs.get("moving_away", DefaultImediateReward.MOVING_AWAY.value) # moving closer
+                    if x > fx and self.dir == Dir.L:
+                        reward = kwargs.get("moving_closer", DefaultImediateReward.DEFAULT_MOVING_CLOSER.value) # moving further away
+                    if x < fx and self.dir == Dir.R:
+                        reward = kwargs.get("moving_closer", DefaultImediateReward.DEFAULT_MOVING_CLOSER.value) # moving further away
+                if self.dir == Dir.U or self.dir == Dir.D:
+                    if y > fy and self.dir == Dir.D:
+                        reward = kwargs.get("moving_away", DefaultImediateReward.MOVING_AWAY.value) # moving closer 
+                    if y < fy and self.dir == Dir.U:
+                        reward = kwargs.get("moving_away", DefaultImediateReward.MOVING_AWAY.value) # moving closer 
+                    if y > fy and self.dir == Dir.U:
+                        reward = kwargs.get("moving_closer", DefaultImediateReward.DEFAULT_MOVING_CLOSER.value) # moving further
+                    if y < fy and self.dir == Dir.D:
+                        reward = kwargs.get("moving_closer", DefaultImediateReward.DEFAULT_MOVING_CLOSER.value) # moving further
+                return reward, terminal, self.score
 
         # very far
         return reward, terminal, self.score

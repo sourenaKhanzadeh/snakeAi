@@ -115,5 +115,54 @@
       "decrease_food_chance":0.3,
       "graph":"food__20_decay__0_30_20x20_2"
     }
+  ],
+  "W9":[
+    {
+      "very_far_range":0,
+      "close_range":0,
+      "far_range":0,
+      "col_wall":-10,
+      "loop":-10,
+      "scored":50,
+      "graph":"col___10_loop___10_score__50_0"
+    },
+    {
+      "very_far_range":0,
+      "close_range":0,
+      "far_range":0,
+      "col_wall":-10,
+      "loop":-10,
+      "scored":50,
+      "graph":"col___10_loop___10_score__50_1"
+    },
+    {
+      "very_far_range":0,
+      "close_range":0,
+      "far_range":0,
+      "col_wall":-10,
+      "loop":-10,
+      "scored":50,
+      "graph":"col___10_loop___10_score__50_2"
+    }
+  ],
+  "W10":[
+    {
+      "is_dir":true,
+      "moving_closer":1,
+      "moving_away":-1,  
+      "graph":"dir_closer__1_away___1_0"
+    },
+    {
+      "is_dir":true,
+      "moving_closer":5,
+      "moving_away":-5,  
+      "graph":"dir_closer__1_away___1_1"
+    },
+    {
+      "is_dir":true,
+      "moving_closer":5,
+      "moving_away":-5,  
+      "graph":"dir_closer__1_away___1_2"
+    }
   ]
 }

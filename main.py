@@ -15,7 +15,9 @@ class Windows(Enum):
     W4 = (20, 20, 1, 1)
     # W6 = (20, 20, 3, 1)
     # W7 = (20, 20, 3, 1)
-    W8 = (20, 20, 3, 1)
+    # W8 = (20, 20, 3, 1)
+    # W9 = (20, 20, 3, 1)
+    W10 = (20, 20, 3, 1)
 
 
 class Game:
@@ -103,8 +105,6 @@ class Game:
                 if (game.n_food > 1) and (random.random() < decrease_probability):
                     game.n_food -= 1
                 
-                print(pars.get('decrease_food_chance', DECREASE_FOOD_CHANCE), game.n_food)
-
                 # prints game information to console
                 print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
@@ -115,4 +115,4 @@ class Game:
 if __name__ == "__main__":
     # for i in range(2, 3):
         # Game(i)
-    Game(8)
+    Game(10)
