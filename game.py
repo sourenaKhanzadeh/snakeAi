@@ -149,7 +149,7 @@ class Snake:
             reward = kwargs.get('col_wall', None) or DefaultImediateReward.COLLISION_WALL.value
             return reward, terminal, self.score
 
-        if self.frame > 100*len(self.body):
+        if self.frame > kwargs.get('kill_frame', DEFAULT_KILL_FRAME)*len(self.body):
             terminal = True
             reward = kwargs.get('loop', None) or DefaultImediateReward.LOOP.value
             return reward, terminal, self.score
