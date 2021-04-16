@@ -141,24 +141,24 @@ class Snake:
         self.body.insert(0, self.head)
 
 
-        reward = kwargs.get('very_far_range', None) or DefaultImediateReward.VERY_FAR_FROM_FOOD.value
+        reward = kwargs.get('very_far_range', DefaultImediateReward.VERY_FAR_FROM_FOOD.value)
         terminal = False
 
         if self.collision():
             terminal = True
-            reward = kwargs.get('col_wall', None) or DefaultImediateReward.COLLISION_WALL.value
+            reward = kwargs.get('col_wall', DefaultImediateReward.COLLISION_WALL.value)
             return reward, terminal, self.score
 
         if self.frame > kwargs.get('kill_frame', DEFAULT_KILL_FRAME)*len(self.body):
             terminal = True
-            reward = kwargs.get('loop', None) or DefaultImediateReward.LOOP.value
+            reward = kwargs.get('loop',  DefaultImediateReward.LOOP.value)
             return reward, terminal, self.score
 
         for fx, fy in self.food:
             if self.head == (fx, fy):
                 self.score += 1
                 self.le += 1
-                reward = kwargs.get('scored', None) or DefaultImediateReward.SCORED.value
+                reward = kwargs.get('scored',  DefaultImediateReward.SCORED.value)
                 del self.food[self.food.index((fx, fy))]
                 self.gen_food()
 
@@ -172,11 +172,11 @@ class Snake:
 
         # food close to snake head
         if any(CLOSE_RANGE[0] <= distance) and  any(distance < CLOSE_RANGE[1]):
-            reward = kwargs.get('close_range', None) or DefaultImediateReward.CLOSE_TO_FOOD.value
+            reward = kwargs.get('close_range', DefaultImediateReward.CLOSE_TO_FOOD.value)
             return reward, terminal, self.score
         # food far to snake head
         elif any(FAR_RANGE[0] <= distance) and any(distance <FAR_RANGE[1]):
-            reward = kwargs.get('far_range', None) or DefaultImediateReward.FAR_FROM_FOOD.value
+            reward = kwargs.get('far_range', DefaultImediateReward.FAR_FROM_FOOD.value) 
             return reward, terminal, self.score
 
         # very far

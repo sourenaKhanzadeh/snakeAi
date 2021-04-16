@@ -10,8 +10,8 @@ import random
 
 class Windows(Enum):
     W1 = (20, 20, 1, 3)
-    W2 = (20, 20, 3, 1)
-    W3 = (30, 30, 1, 1)
+    # W2 = (20, 20, 3, 1)
+    W5 = (20, 20, 3, 1)
     W4 = (20, 20, 1, 1)
 
 
@@ -63,7 +63,7 @@ class Game:
     def train(self, n, m, pars):
         record = 0
         game = Snake(n, m, pars.get('n_food', None))
-        agent = Agent(game)
+        agent = Agent(game, pars)
 
         while True:
             # get old state
@@ -110,4 +110,4 @@ class Game:
 if __name__ == "__main__":
     # for i in range(2, 3):
         # Game(i)
-    Game(1)
+    Game(5)

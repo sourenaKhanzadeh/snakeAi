@@ -30,9 +30,10 @@
       "num_games":300
     }    
   ],
-  "W3":[
+  "W5":[
     {
       "gamma":0.99,
+      "eps":0,
       "graph":"gamma__0_99_WIN_20x20_0",
       "num_games":300
     },

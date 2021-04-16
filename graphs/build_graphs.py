@@ -16,13 +16,15 @@ if __name__ == "__main__":
    for i in range(3):
       scoreList = []
       recordList = []
-      file = open(f'gamma__0_0_WIN_20x20_{i}.txt')
+      file = open(f'gamma__0_99_WIN_20x20_{i}.txt')
       j = 0
       for row in file:
+         
+         j += 1
          row = row.split(' ')
          scoreList.append(int(row[1]))
          recordList.append(int(row[2]))
-         j += 1
+
          if j > 300:
             break
       score_avg.append(scoreList)

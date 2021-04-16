@@ -9,12 +9,12 @@ class Agent:
 
     def __init__(self, game, pars=dict()):
         self.n_games = 0
-        self.epsilon = EPSILON # randomness
-        self.eps = pars.get('eps', None) or EPSILON
-        self.gamma = pars.get('gamma', None) or GAMMA # discount rate
-        self.eps_range = pars.get('eps_range', None) or EPS_RANGE
+        self.epsilon = pars.get('eps', EPSILON)
+        self.eps = pars.get('eps', EPSILON)
+        self.gamma = pars.get('gamma', GAMMA) # discount rate
+        self.eps_range = pars.get('eps_range', EPS_RANGE)
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(len(game.get_state()), pars.get('hidden_size', None) or HIDDEN_SIZE, OUTPUT_SIZE)
+        self.model = Linear_QNet(len(game.get_state()), pars.get('hidden_size', HIDDEN_SIZE), OUTPUT_SIZE)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
         self.game = game
