@@ -1,18 +1,20 @@
 {
   "W1":[
     {
-      "gamma":0,
-      "graph":"gamma__0_0_WIN_20x20_0"
+      "eps":200,
+      "graph":"epsilon__200__0"
     },
     {
-      "gamma":0,
-      "graph":"gamma__0_0_WIN_20x20_1"
+      "eps":200,
+      "graph":"epsilon__200__1"
     },
     {
-      "gamma":0,
-      "graph":"gamma__0_0_WIN_20x20_2"
+      "eps":200,
+      "graph":"epsilon__200__2"
     }    
   ],
+
+
   "W2":[
     {
       "gamma":0.5,
@@ -30,6 +32,8 @@
       "num_games":300
     }    
   ],
+
+
   "W5":[
     {
       "gamma":0.99,
@@ -48,6 +52,8 @@
       "num_games":300
     }    
   ],
+
+  
   "W4":[
     {
       "empty_cell":0,
