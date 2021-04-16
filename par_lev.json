@@ -115,5 +115,29 @@
       "decrease_food_chance":0.3,
       "graph":"food__20_decay__0_30_20x20_2"
     }
+  ],
+  "W9":[
+    {
+      "very_far_range":5,
+      "close_range":15,
+      "far_range":10,
+      "scored":20,
+      "graph":"scored__20__far__10__close__15__veryfar__5__0"
+    },
+    {
+      "very_far_range":5,
+      "close_range":15,
+      "far_range":10,
+      "scored":20,
+      "graph":"scored__20__far__10__close__15__veryfar__5__1"
+    },
+    {
+      "very_far_range":5,
+      "close_range":15,
+      "far_range":10,
+      "scored":20,
+      "graph":"scored__20__far__10__close__15__veryfar__5__2"
+      
+    }
   ]
 }
