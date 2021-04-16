@@ -164,5 +164,25 @@
       "moving_away":-10,  
       "graph":"dir_closer__10_away___10_2"
     }
+  ],
+  "W11":[
+    {
+      "col_wall":-30,
+      "loop":-30,
+      "scored":30,
+      "graph":"col___30_loop___30_score__30_0"
+    },
+    {
+      "col_wall":-30,
+      "loop":-30,
+      "scored":30,
+      "graph":"col___30_loop___30_score__30_1"
+    },
+    {
+      "col_wall":-30,
+      "loop":-30,
+      "scored":30,
+      "graph":"col___30_loop___30_score__30_2"
+    }
   ]
 }
