@@ -118,25 +118,22 @@
   ],
   "W9":[
     {
-      "very_far_range":5,
-      "close_range":15,
-      "far_range":10,
-      "scored":20,
-      "graph":"scored__20__far__10__close__15__veryfar__5__0"
+      "col_wall":-50,
+      "scored":10,
+      "loop":-50,
+      "graph":"scored__50__loop__-50__colwall__-50__0"
     },
     {
-      "very_far_range":5,
-      "close_range":15,
-      "far_range":10,
-      "scored":20,
-      "graph":"scored__20__far__10__close__15__veryfar__5__1"
+      "col_wall":-50,
+      "scored":10,
+      "loop":-50,
+      "graph":"scored__50__loop__-50__colwall__-50__1"
     },
     {
-      "very_far_range":5,
-      "close_range":15,
-      "far_range":10,
-      "scored":20,
-      "graph":"scored__20__far__10__close__15__veryfar__5__2"
+      "col_wall":-50,
+      "scored":10,
+      "loop":-50,
+      "graph":"scored__50__loop__-50__colwall__-50__2"
       
     }
   ]
