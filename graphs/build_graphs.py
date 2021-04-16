@@ -11,48 +11,67 @@ def moving_average(arr, window_size):
    return newarr
 
 if __name__ == "__main__":
-
+   score_avg = []
+   record_avg = []
    for i in range(3):
       scoreList = []
       recordList = []
       file = open(f'gamma__0_5_WIN_20x20_{i}.txt')
+      j = 0
       for row in file:
          row = row.split(' ')
          scoreList.append(int(row[1]))
          recordList.append(int(row[2]))
+         j += 1
+         if j > 300:
+            break
+      score_avg.append(scoreList)
+      record_avg.append(recordList)
       file.close()
+   
+   score = []
+   rec =  []
+   print(len(score_avg))
+   for item in range(len(score_avg[0])): 
+      res = score_avg[0][item] + score_avg[1][item] + score_avg[2][item]
+      score.append(round(res/3, 2))
 
-      #cumulativeScoreList = np.cumsum(scoreList)
-      #ax[1].plot(cumulativeScore)
-      #ax[1].set_ylabel("Cumul. Score", fontsize=10)
+   for item in range(len(record_avg[0])): 
+      res = record_avg[0][item] + record_avg[1][item] + record_avg[2][item]
+      rec.append(round(res/3, 2))
 
-      windowSize = 20
-      movingAverageList = moving_average(scoreList, windowSize)
+         
+      # cumulativeScoreList = np.cumsum(scoreList)
+      # ax[1].plot(cumulativeScore)
+      # ax[1].set_ylabel("Cumul. Score", fontsize=10)
 
-      # Create a 3x1 plot
-      fig = plt.figure()
-      fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
-      
-      # Title
-      ax[0].set_title('GAMMA: 0.0')
+   windowSize = 20
+   movingAverageList = moving_average(score, windowSize)
 
-      # Score plot
-      ax[0].plot(scoreList)
-      ax[0].set_ylabel("Score", fontsize=10)
-      ax[0].set_ylim([0,100])   #y-axis for trained policies
-      # ax[0].set_ylim([0, 5])    #y-axis for no policy
+   # Create a 3x1 plot
+   fig = plt.figure()
+   fig, ax = plt.subplots(3, 1, sharex='col', sharey='row')
+   
+   # Title
+   ax[0].set_title('GAMMA: 0.0')
 
-      # Moving average plot
-      ax[1].plot(movingAverageList)
-      ax[1].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
-      ax[1].set_ylim([0,60])    #y-axis for trained policies
-      # ax[1].set_ylim([0, 5])    #y-axis for no policy
+   # Score plot
+   ax[0].plot(score)
+   ax[0].set_ylabel("Score", fontsize=10)
+   ax[0].set_ylim([0,100])   #y-axis for trained policies
+   # ax[0].set_ylim([0, 5])    #y-axis for no policy
 
-      # Record plot
-      ax[2].plot(recordList)
-      ax[2].set_ylabel("Record", fontsize=10)
-      ax[2].set_xlabel("Game Number", fontsize=10)
-      ax[2].set_ylim([0,100])   #y-axis for trained policies
-      # ax[2].set_ylim([0, 5])    #y-axis for no policy
+   # Moving average plot
+   ax[1].plot(movingAverageList)
+   ax[1].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
+   ax[1].set_ylim([0,60])    #y-axis for trained policies
+   # ax[1].set_ylim([0, 5])    #y-axis for no policy
 
-      plt.show()
+   # Record plot
+   ax[2].plot(rec)
+   ax[2].set_ylabel("Record", fontsize=10)
+   ax[2].set_xlabel("Game Number", fontsize=10)
+   ax[2].set_ylim([0,100])   #y-axis for trained policies
+   # ax[2].set_ylim([0, 5])    #y-axis for no policy
+
+   plt.show()

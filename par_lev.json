@@ -2,19 +2,33 @@
   "W1":[
     {
       "gamma":0,
-      "graph":"gamma__0_5_WIN_20x20_0"
+      "graph":"gamma__0_0_WIN_20x20_0"
     },
     {
       "gamma":0,
-      "graph":"gamma__0_5_WIN_20x20_1"
+      "graph":"gamma__0_0_WIN_20x20_1"
     },
     {
       "gamma":0,
-      "graph":"gamma__0_5_WIN_20x20_2"
+      "graph":"gamma__0_0_WIN_20x20_2"
     }    
   ],
   "W2":[
-    {}
+    {
+      "gamma":0.5,
+      "graph":"gamma__0_5_WIN_20x20_0",
+      "num_games":10
+    },
+    {
+      "gamma":0.5,
+      "graph":"gamma__0_5_WIN_20x20_1",
+      "num_games":10
+    },
+    {
+      "gamma":0.5,
+      "graph":"gamma__0_5_WIN_20x20_2",
+      "num_games":10
+    }    
   ],
   "W3":[
     {}

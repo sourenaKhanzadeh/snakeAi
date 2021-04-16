@@ -37,3 +37,6 @@ EPSILON = 80
 
 EPS_RANGE = (0, 200)
 is_random_move = lambda eps, eps_range: random.randint(eps_range[0], eps_range[1]) < eps
+
+
+DEFAULT_END_GAME_POINT = 300

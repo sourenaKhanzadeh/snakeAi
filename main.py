@@ -10,7 +10,7 @@ import random
 
 class Windows(Enum):
     W1 = (20, 20, 1, 3)
-    W2 = (10, 10, 2, 2)
+    W2 = (20, 20, 3, 1)
     W3 = (30, 30, 1, 1)
     W4 = (20, 20, 1, 1)
 
@@ -82,6 +82,10 @@ class Game:
             # remember
             agent.remember(state_old, final_move, reward, state_new, done)
 
+            if pars.get('num_games', DEFAULT_END_GAME_POINT) != -1:
+                if agent.n_games > pars.get('num_games', DEFAULT_END_GAME_POINT):
+                    quit()
+                    break
             if done:
                 game.reset()
                 agent.n_games += 1
@@ -101,6 +105,7 @@ class Game:
 
                 # appends game information to txt filen at specified path
                 self.save_to_file(f"graphs/{pars.get('graph', 'test')}.txt", agent.n_games, score, record)    
-     
+    
+
 if __name__ == "__main__":
-    g = Game(1)
+    g = Game(2)
