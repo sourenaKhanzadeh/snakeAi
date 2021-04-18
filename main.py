@@ -116,4 +116,4 @@ class Game:
 if __name__ == "__main__":
     # for i in range(2, 3):
         # Game(i)
-    Game(11)
+    Game(12)

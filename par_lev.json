@@ -145,6 +145,7 @@
       "graph":"col___10_loop___10_score__50_2"
     }
   ],
+  
   "W10":[
     {
       "is_dir":true,
@@ -165,6 +166,7 @@
       "graph":"dir_closer__10_away___10_2"
     }
   ],
+  
   "W11":[
     {
       "col_wall":-1,
@@ -184,5 +186,8 @@
       "scored":1,
       "graph":"col___1_loop___1_score__1_2"
     }
+  ],
+  "W12":[
+    {}
   ]
 }
