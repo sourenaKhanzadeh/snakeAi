@@ -16,7 +16,7 @@ class Agent:
         print(self.epsilon ,self.eps)
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
         self.model = Linear_QNet(len(game.get_state()), pars.get('hidden_size', HIDDEN_SIZE), OUTPUT_SIZE)
-        self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
+        self.trainer = QTrainer(self.model, lr=pars.get('lr',LR), gamma=self.gamma)
 
         self.game = game
 
