@@ -46,9 +46,10 @@ def get_score_and_record(folder):
 
 if __name__ == "__main__":
    
-   score_0, rec_0 = get_score_and_record("folder1__")
-   score_1, rec_1 = get_score_and_record("folder2__")
-   score_2, rec_2 = get_score_and_record("folder3__")
+   score_0, rec_0 = get_score_and_record("lr__0_5_")
+   score_1, rec_1 = get_score_and_record("lr__0_0_5_")
+   score_2, rec_2 = get_score_and_record("lr__0_0_0_5_")
+   #score_3, rec_3 = get_score_and_record("folder3__")
 
    windowSize = 5
 
@@ -57,9 +58,8 @@ if __name__ == "__main__":
    movingAverageList2 = moving_average(score_2, windowSize)
    #movingAverageList3 = moving_average(score_3, windowSize)
 
-   # Create a 2x3 plot
-   #fig, ax = plt.subplots(2, 1, sharex='col', sharey='row', figsize=(12,5))
-   fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(4,5))
+   # Create a X by Y subplot, change X and Y if you change the # of subplots
+   fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(12,5))
 
    # Score plot, no longer being used
    #ax[0].plot(score)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
    # X O O
    # O O O
    ax[0][0].plot(movingAverageList0)
-   ax[0][0].set_title('CLOSER: 1, AWAY: -1')
+   ax[0][0].set_title('LR: 0.05')
    ax[0][0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
 
    # Record plot
@@ -85,7 +85,7 @@ if __name__ == "__main__":
    # O X O
    # O O O
    ax[0][1].plot(movingAverageList1)
-   ax[0][1].set_title('CLOSER: 5, AWAY: -5')
+   ax[0][1].set_title('LR: 0.005')
 
    # Record plot
    # O O O
@@ -97,7 +97,7 @@ if __name__ == "__main__":
    # O O X
    # O O O
    ax[0][2].plot(movingAverageList2)
-   ax[0][2].set_title('CLOSER: 10, AWAY: -10')
+   ax[0][2].set_title('LR: 0.0005')
 
    # Record plot
    # O O O
