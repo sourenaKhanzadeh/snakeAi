@@ -14,9 +14,152 @@ Reinforcement Learning with the classic snake game
     </embed>
 </object>
 
-# Reinforment Learning Using Snake Game
+## Installations 
+---
 
-Report
+![pytorch](https://github.com/pytorch/pytorch/blob/master/docs/source/_static/img/pytorch-logo-dark.png)
+install pytorch from here: https://pytorch.org/
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## Run The Game
+---
+```bash
+python main.py
+```
+
+## Configurations
+All static settings are in settings.py
+```python
+import random
+
+# snake size
+SIZE = 20
+
+# ranges for defining close and far
+CLOSE_RANGE = (0, 2)
+FAR_RANGE = (CLOSE_RANGE[1], 9)
+
+set_size  = lambda x: SIZE * x
+
+DEFAULT_WINDOW_SIZES = (32, 24)
+
+# set to None to change to Default
+WINDOW_N_X = 12
+WINDOW_N_Y = 12
+
+
+SCREEN_WIDTH = set_size(WINDOW_N_X) or set_size(DEFAULT_WINDOW_SIZES[0])
+SCREEN_HEIGHT = set_size(WINDOW_N_Y) or set_size(DEFAULT_WINDOW_SIZES[1])
+
+DEFAULT_KILL_FRAME = 100
+DEFAULT_SPEED = 50 # change the speed of the game
+DEFAULT_N_FOOD = 1
+DECREASE_FOOD_CHANCE = 0.8
+
+# Neural Networks Configuration
+HIDDEN_SIZE = 256
+OUTPUT_SIZE = 3
+
+MAX_MEMORY = 100_000
+BATCH_SIZE = 1000
+LR = 0.001
+
+GAMMA = 0.9
+
+EPSILON = 80
+
+EPS_RANGE = (0, 200)
+is_random_move = lambda eps, eps_range: random.randint(eps_range[0], eps_range[1]) < eps
+
+
+DEFAULT_END_GAME_POINT = 300
+```
+
+## Adding New Windows
+
+Go to main.py and add more windows and processors
+```python
+
+class Windows(Enum):
+    """
+    Windows enums
+    W_i = (m, n, s, k)
+    where m is number of row tiles
+          n is number of column tiles
+          s is number of row processors
+          k is number of column processors
+    """
+    #W1 = (20, 20, 1, 3)
+    # W2 = (20, 20, 3, 1)
+    # W5 = (20, 20, 3, 1)
+    #W4 = (20, 20, 1, 1)
+    # W6 = (20, 20, 3, 1)
+    # W7 = (20, 20, 3, 1)
+    # W8 = (20, 20, 3, 1)
+    # W9 = (20, 20, 3, 1)
+    # W10 = (20, 20, 3, 1)
+    # W11 = (20, 20, 3, 1)
+    # W12 = (20, 20, 3, 1)
+    # W13 = (20, 20, 3, 1)
+    W14 = (20, 20, 1, 1)
+```
+
+### Run The Window
+
+The following will run window 14
+```python
+
+if __name__ == "__main__":
+    Game(14)
+```
+
+## Adding Parameters To Processors
+---
+In par_lev.json:
+Add parameters for instance "world 1" where world is (20, 20, 1, 3) the following: 
+first processor will have all these parameters, second the epsilon changes to 80 and graph name different and third parameters will use the 
+default, look at the report for more info on default values and settings.py.
+```json
+{
+"W1":[
+    {
+      "empty_cell":0,
+      "very_far_range":0,
+      "close_range":0,
+      "far_range":0,
+      "col_wall":-10,
+      "loop":-10,
+      "scored":10,
+      "gamma":0.5,
+      "eps":200,
+      "eps_range":[0, 200],
+      "hidden_size":256,
+      "n_food":1,
+      "decrease_food_chance":-1,
+      "kill_frame":100,
+      "num_games":-1,
+      "is_dir":true,
+      "moving_closer":10,
+      "moving_away":-10,
+      "lr":0.0005,
+      "graph":"epsilon__200__0"
+    },
+    {
+      "eps":80,
+      "graph":"epsilon__200__1"
+    },
+    {
+    }    
+  ]
+ }
+```
+
+# Reinforment Learning Using Snake Game
+---
 
   | Main Contributors  | Emails |
   |---| --- |
