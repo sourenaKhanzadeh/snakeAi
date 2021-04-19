@@ -19,7 +19,8 @@ class Windows(Enum):
     # W9 = (20, 20, 3, 1)
     # W10 = (20, 20, 3, 1)
     # W11 = (20, 20, 3, 1)
-    W12 = (20, 20, 3, 1)
+    # W12 = (20, 20, 3, 1)
+    W13 = (20, 20, 3, 1)
 
 
 class Game:
@@ -117,4 +118,4 @@ class Game:
 if __name__ == "__main__":
     # for i in range(2, 3):
         # Game(i)
-    Game(12)
+    Game(13)
