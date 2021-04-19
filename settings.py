@@ -20,7 +20,7 @@ SCREEN_WIDTH = set_size(WINDOW_N_X) or set_size(DEFAULT_WINDOW_SIZES[0])
 SCREEN_HEIGHT = set_size(WINDOW_N_Y) or set_size(DEFAULT_WINDOW_SIZES[1])
 
 DEFAULT_KILL_FRAME = 100
-DEFAULT_SPEED = 1000 # change the speed of the game
+DEFAULT_SPEED = 50 # change the speed of the game
 DEFAULT_N_FOOD = 1
 DECREASE_FOOD_CHANCE = 0.8
 

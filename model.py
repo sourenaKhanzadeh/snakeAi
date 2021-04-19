@@ -22,11 +22,21 @@ class Linear_QNet(nn.Module):
 
     # @Override
     def forward(self, x):
+        """
+        (Linear_QNet, *input) -> *output
+        override forward function
+        add relu activation
+        """
         x = F.relu(self.linear1(x))
         x = self.linear2(x)
         return x
 
     def save(self, file_name='model.pth'):
+        """
+        (Linear_QNet, str) -> None
+        file_name: path of the save state files
+        save the model state to a file_name
+        """
         model_folder_path = './model'
         if not os.path.exists(model_folder_path):
             os.makedirs(model_folder_path)
@@ -36,7 +46,15 @@ class Linear_QNet(nn.Module):
 
 
 class QTrainer:
+    """
+    QTrainer class
+    train the model
+    """
     def __init__(self, model, lr, gamma):
+        """
+        (QTrainer, Linear_QNet, float, float) -> None
+        initialize all model parameters
+        """
         self.lr = lr
         self.gamma = gamma
         self.model = model
@@ -44,6 +62,15 @@ class QTrainer:
         self.criterion = nn.MSELoss()
 
     def train_step(self, state, action, reward, next_state, done):
+        """
+        (QTrainer, float, long, float, float, bool) -> None
+        state: current state of agent
+        action: current action taken by the agent
+        reward: current immediate reward
+        next_state: next state of the agent
+        done: terminal boolean
+        """
+        # turn into tensor
         state = torch.tensor(state, dtype=torch.float)
         next_state = torch.tensor(next_state, dtype=torch.float)
         action = torch.tensor(action, dtype=torch.long)
@@ -62,6 +89,7 @@ class QTrainer:
         pred = self.model(state)
         target = pred.clone()
 
+        # update Q values
         for idx in range(len(done)):
             Q_new = reward[idx]
             if not done[idx]:
@@ -69,6 +97,7 @@ class QTrainer:
             target[idx][torch.argmax(action[idx]).item()] = Q_new
             
         self.optimizer.zero_grad()
+        # calculate the loss
         loss = self.criterion(target, pred)
         loss.backward()
 

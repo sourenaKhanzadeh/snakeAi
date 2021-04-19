@@ -233,11 +233,6 @@
   ,
   "W14":[
     {
-      "moving_closer":10,
-      "moving_away":-10,
-      "scored":30,
-      "coll_wall":-100,
-      "loop":-100
     }
   ]
 }
