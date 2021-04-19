@@ -4,6 +4,19 @@ import torch.optim as optim
 import torch.nn.functional as F
 import os
 
+"""
+NOTE: this entire file has been copied from a git repo
+Credit: 
+    Authur: Patrick Loeber
+    source: https://github.com/python-engineer/snake-ai-pytorch/blob/main/model.py
+    Vocation: Python Engineer
+    Company Name: Python Engineer
+We do not own this code and do not take any credit from it
+everything in this file is copy pasted code from above github repo
+it is a public free to share code, only the documentation has been
+added manually.
+"""
+
 class Linear_QNet(nn.Module):
     """
     Linear_QNet nn.Module class
