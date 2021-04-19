@@ -47,22 +47,22 @@ def get_score_and_record(folder):
 if __name__ == "__main__":
    
    # Get score and record from txt files in specified folder
-   score_0, rec_0 = get_score_and_record("default__1000_games_")
-   #score_1, rec_1 = get_score_and_record("optimal_lr__000005_eps__500_")
-   #score_2, rec_2 = get_score_and_record("folder2")
+   score_0, rec_0 = get_score_and_record("epsilon__0__")
+   score_1, rec_1 = get_score_and_record("epsilon__100__")
+   score_2, rec_2 = get_score_and_record("epsilon__200__")
    #score_3, rec_3 = get_score_and_record("folder3__")
 
    windowSize = 15
 
    movingAverageList0 = moving_average(score_0, windowSize)
-   #movingAverageList1 = moving_average(score_1, windowSize)
-   #movingAverageList2 = moving_average(score_2, windowSize)
+   movingAverageList1 = moving_average(score_1, windowSize)
+   movingAverageList2 = moving_average(score_2, windowSize)
    #movingAverageList3 = moving_average(score_3, windowSize)
 
    # Create a X by Y subplot, change X and Y if you change the # of subplots
    # figsize(12,5) for multi-plot... 
    # figsize(4,5) for one plot
-   fig, ax = plt.subplots(2, 1, sharex='col', sharey='row', figsize=(4,5))
+   fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(12,5))
 
    # Score plot, no longer being used
    #ax[0].plot(score)
@@ -75,40 +75,40 @@ if __name__ == "__main__":
    # Moving average plot
    # X O O
    # O O O
-   ax[0].plot(movingAverageList0)
-   ax[0].set_title('Default Parameters')
-   ax[0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
+   ax[0][0].plot(movingAverageList0)
+   ax[0][0].set_title('EPSILON: 0.0')
+   ax[0][0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
 
    # Record plot
    # O O O
    # X O O
-   ax[1].plot(rec_0)
-   ax[1].set_ylabel("Record", fontsize=10)
-   ax[1].set_xlabel("Game Number", fontsize=10)
+   ax[1][0].plot(rec_0)
+   ax[1][0].set_ylabel("Record", fontsize=10)
+   ax[1][0].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O X O
    # O O O
-   #ax[0][1].plot(movingAverageList1)
-   #ax[0][1].set_title('Optimal Parameters')
+   ax[0][1].plot(movingAverageList1)
+   ax[0][1].set_title('EPSILON: 0.5')
 
    # Record plot
    # O O O
    # O X O
-   #ax[1][1].plot(rec_1)
-   #ax[1][1].set_xlabel("Game Number", fontsize=10)
+   ax[1][1].plot(rec_1)
+   ax[1][1].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O O X
    # O O O
-   #ax[0][2].plot(movingAverageList2)
-   #ax[0][2].set_title('LR: 0.0005')
+   ax[0][2].plot(movingAverageList2)
+   ax[0][2].set_title('EPSILON: 1.0')
 
    # Record plot
    # O O O
    # O O X
-   #ax[1][2].plot(rec_2)
-   #ax[1][2].set_xlabel("Game Number", fontsize=10)
+   ax[1][2].plot(rec_2)
+   ax[1][2].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O O O X
@@ -124,4 +124,4 @@ if __name__ == "__main__":
 
    plt.show()
    
-   fig.savefig('default_1000_games.png', bbox_inches="tight")
+   fig.savefig('test.png', bbox_inches="tight")
