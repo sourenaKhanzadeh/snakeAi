@@ -69,9 +69,9 @@ class Snake:
         self.clock = pygame.time.Clock()
 
         # reset game once
+        self.n_food = DEFAULT_N_FOOD if n_food == None else n_food
         self.reset()
         self.frame = 0
-        self.n_food = DEFAULT_N_FOOD if n_food == None else n_food
 
     def reset(self):
         """
@@ -107,6 +107,9 @@ class Snake:
         # if food found in snake body then regenerate recursiveley
         if self.food[-1] in self.body:
             self.gen_food()
+            
+        if self.n_food == 1 and len(self.food) > 1:
+            del self.food[1:]
 
     def get_state(self):
         """

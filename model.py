@@ -5,11 +5,22 @@ import torch.nn.functional as F
 import os
 
 class Linear_QNet(nn.Module):
+    """
+    Linear_QNet nn.Module class
+    Model to use
+    """
     def __init__(self, input_size, hidden_size, output_size):
+        """
+        (Linear_QNet, int, int, int) -> None
+        input_size: size of the game states
+        hidden_size: one layer network hidden layer size
+        output_size: output size of the NN which is the number of snakes action
+        """
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
         self.linear2 = nn.Linear(hidden_size, output_size)
 
+    # @Override
     def forward(self, x):
         x = F.relu(self.linear1(x))
         x = self.linear2(x)
