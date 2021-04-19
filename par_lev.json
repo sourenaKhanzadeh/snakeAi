@@ -188,6 +188,17 @@
     }
   ],
   "W12":[
-    {}
+    {
+      "num_games":1000,
+      "graph":"default__1000_games_0"
+    },
+    {
+      "num_games":1000,
+      "graph":"default__1000_games_1"
+    },
+    {
+      "num_games":1000,
+      "graph":"default__1000_games_2"
+    }
   ]
 }
