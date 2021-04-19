@@ -46,20 +46,21 @@ def get_score_and_record(folder):
 
 if __name__ == "__main__":
    
-   score_0, rec_0 = get_score_and_record("lr__0_5_")
-   score_1, rec_1 = get_score_and_record("lr__0_0_5_")
-   score_2, rec_2 = get_score_and_record("lr__0_0_0_5_")
+   score_0, rec_0 = get_score_and_record("optimal__")
+   #score_1, rec_1 = get_score_and_record("folder1")
+   #score_2, rec_2 = get_score_and_record("folder2")
    #score_3, rec_3 = get_score_and_record("folder3__")
 
    windowSize = 5
 
    movingAverageList0 = moving_average(score_0, windowSize)
-   movingAverageList1 = moving_average(score_1, windowSize)
-   movingAverageList2 = moving_average(score_2, windowSize)
+   #movingAverageList1 = moving_average(score_1, windowSize)
+   #movingAverageList2 = moving_average(score_2, windowSize)
    #movingAverageList3 = moving_average(score_3, windowSize)
 
    # Create a X by Y subplot, change X and Y if you change the # of subplots
-   fig, ax = plt.subplots(2, 3, sharex='col', sharey='row', figsize=(12,5))
+   # figsize(12,5) for multi-plot, figsize(4,5) for one plot
+   fig, ax = plt.subplots(2, 1, sharex='col', sharey='row', figsize=(4,5))
 
    # Score plot, no longer being used
    #ax[0].plot(score)
@@ -70,40 +71,40 @@ if __name__ == "__main__":
    # Moving average plot
    # X O O
    # O O O
-   ax[0][0].plot(movingAverageList0)
-   ax[0][0].set_title('LR: 0.05')
-   ax[0][0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
+   ax[0].plot(movingAverageList0)
+   ax[0].set_title('Optimal Parameters')
+   ax[0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
 
    # Record plot
    # O O O
    # X O O
-   ax[1][0].plot(rec_0)
-   ax[1][0].set_ylabel("Record", fontsize=10)
-   ax[1][0].set_xlabel("Game Number", fontsize=10)
+   ax[1].plot(rec_0)
+   ax[1].set_ylabel("Record", fontsize=10)
+   ax[1].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O X O
    # O O O
-   ax[0][1].plot(movingAverageList1)
-   ax[0][1].set_title('LR: 0.005')
+   #ax[0][1].plot(movingAverageList1)
+   #ax[0][1].set_title('LR: 0.005')
 
    # Record plot
    # O O O
    # O X O
-   ax[1][1].plot(rec_1)
-   ax[1][1].set_xlabel("Game Number", fontsize=10)
+   #ax[1][1].plot(rec_1)
+   #ax[1][1].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O O X
    # O O O
-   ax[0][2].plot(movingAverageList2)
-   ax[0][2].set_title('LR: 0.0005')
+   #ax[0][2].plot(movingAverageList2)
+   #ax[0][2].set_title('LR: 0.0005')
 
    # Record plot
    # O O O
    # O O X
-   ax[1][2].plot(rec_2)
-   ax[1][2].set_xlabel("Game Number", fontsize=10)
+   #ax[1][2].plot(rec_2)
+   #ax[1][2].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O O O X
