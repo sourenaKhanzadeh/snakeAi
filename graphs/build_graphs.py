@@ -25,7 +25,7 @@ def get_score_and_record(folder):
          scoreList.append(int(row[1]))
          recordList.append(int(row[2]))
 
-         if j > 300:
+         if j > 1000:
             break
       score_avg.append(scoreList)
       record_avg.append(recordList)
@@ -46,53 +46,57 @@ def get_score_and_record(folder):
 
 if __name__ == "__main__":
    
-   score_0, rec_0 = get_score_and_record("optimal__")
-   #score_1, rec_1 = get_score_and_record("folder1")
+   # Get score and record from txt files in specified folder
+   score_0, rec_0 = get_score_and_record("default__1000_games_")
+   score_1, rec_1 = get_score_and_record("optimal_1000__")
    #score_2, rec_2 = get_score_and_record("folder2")
    #score_3, rec_3 = get_score_and_record("folder3__")
 
-   windowSize = 5
+   windowSize = 15
 
    movingAverageList0 = moving_average(score_0, windowSize)
-   #movingAverageList1 = moving_average(score_1, windowSize)
+   movingAverageList1 = moving_average(score_1, windowSize)
    #movingAverageList2 = moving_average(score_2, windowSize)
    #movingAverageList3 = moving_average(score_3, windowSize)
 
    # Create a X by Y subplot, change X and Y if you change the # of subplots
-   # figsize(12,5) for multi-plot, figsize(4,5) for one plot
-   fig, ax = plt.subplots(2, 1, sharex='col', sharey='row', figsize=(4,5))
+   # figsize(12,5) for multi-plot... 
+   # figsize(4,5) for one plot
+   fig, ax = plt.subplots(2, 2, sharex='col', sharey='row', figsize=(12,5))
 
    # Score plot, no longer being used
    #ax[0].plot(score)
    #ax[0].set_ylabel("Score", fontsize=10)
-   #ax[0].set_ylim([0,50])   #y-axis for trained policies
-   # ax[0].set_ylim([0, 5])    #y-axis for no policy
+   
+   # Custom y-axis, no longer being used
+   #ax[0][0].set_ylim([0, 40])   
+   #ax[1][0].set_ylim([0, 100])   
 
    # Moving average plot
    # X O O
    # O O O
-   ax[0].plot(movingAverageList0)
-   ax[0].set_title('Optimal Parameters')
-   ax[0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
+   ax[0][0].plot(movingAverageList0)
+   ax[0][0].set_title('Default Parameters')
+   ax[0][0].set_ylabel("Score\n(%s Game MA)" % (str(windowSize)), fontsize=10)
 
    # Record plot
    # O O O
    # X O O
-   ax[1].plot(rec_0)
-   ax[1].set_ylabel("Record", fontsize=10)
-   ax[1].set_xlabel("Game Number", fontsize=10)
+   ax[1][0].plot(rec_0)
+   ax[1][0].set_ylabel("Record", fontsize=10)
+   ax[1][0].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O X O
    # O O O
-   #ax[0][1].plot(movingAverageList1)
-   #ax[0][1].set_title('LR: 0.005')
+   ax[0][1].plot(movingAverageList1)
+   ax[0][1].set_title('Optimal Parameters')
 
    # Record plot
    # O O O
    # O X O
-   #ax[1][1].plot(rec_1)
-   #ax[1][1].set_xlabel("Game Number", fontsize=10)
+   ax[1][1].plot(rec_1)
+   ax[1][1].set_xlabel("Game Number", fontsize=10)
 
    # Moving average plot
    # O O X
