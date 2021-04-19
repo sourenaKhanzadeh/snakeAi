@@ -10,7 +10,7 @@ Reinforcement Learning with the classic snake game
 
 <object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="http://yoursite.com/the.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+        <p>Final Report: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
@@ -18,31 +18,16 @@ Reinforcement Learning with the classic snake game
 
 Report
 
-Ronak Ghatalia
- Computer Science
- Ryerson University
-Toronto, Canada
+  | Main Contributors  | Emails |
+  |---| --- |
+  | Ronak Ghatalia  |    ronak.ghatalia@ryerson.ca |
+  | Sourena Khanzadeh  | sourena.khanzadeh@ryerson.ca |
+  |  Fahad Jamil  |   f1jamil@ryerson.ca | 
+  |  Anthony Greco  | anthony1.greco@ryerson.ca |
 
 
- Sourena Khanzadeh
- Computer Science
- Ryerson University
-Toronto, Canada
-
-
- Fahad Jamil
- Ryerson University
- Ryerson University
-Toronto, Canada
-
-
- Anthony Greco
- Computer Science
- Ryerson University
-Toronto, Canada
-
-1.
 # Introduction
+---
 
 Reinforcement learning (RL) is an area of machine learning where an agent aims to make the optimal decision in an uncertain environment to get the maximum cumulative reward. Since RL requires an agent to operate and learn in its environment, it&#39;s often easier to implement agents inside of simulations on computers than in real world situations.
 
@@ -52,8 +37,8 @@ For the reasons listed above, we have chosen to implement an RL agent on the gam
 
 We chose to use Deep Q-Learning as our algorithm to allow our agent to make optimal decisions solely from raw input data. No rules about the Snake game are given to the agent. This approach consists solely on giving the agent information about the state of the game and giving it negative or positive feedback based on its actions taken.
 
-1.
 # Related Research
+---
 
 A paper was published that used a learned policy gradient that is used to update the value function and learn from it with bootstrapping. It found that this &quot;generalizes effectively to complex Atari games&quot; [1].
 
@@ -63,8 +48,9 @@ Deep learning is also being used in reinforcement learning. A paper was publishe
 
 There have been some attempts to use bandits in video games. A paper was published that used semi-bandit and bandit and both cases converge to a Nash equilibrium [4].
 
-1.
+
 # Method
+---
 
 A common algorithm that has been used is q-learning, and now has been expanded to include neural networks with deep Q learning methods. We decided that we could experiment with this new method that is gaining in use based on the research done with Atari games [3].
 
@@ -78,14 +64,15 @@ When starting the training for the first time each state is passed to the Q-netw
 
 Our game was designed so the frame rate can be changed so we can change how often the states are updated during the game. The amount of food generated can also be changed. For the model we can adjust epsilon, learning rate, gamma, the batch size, and rewards.
 
-1.
+
 # Experiments
+---
 
 Based on our model we wanted to see how well this method allows our agent to learn, and the best way to optimize the performance of the agent. We have a base case of no learning to see how a random untrained agent would perform. Then we changed different parameters holding others constant to see how they impact the performance.
 
 Below is the performance of a random agent.
 
-![](RackMultipart20210419-4-12q9lef_html_f670e5de7f0befb9.png)
+![No Training](graphs/no_training.png)
 
 This graph shows that our agent performed randomly each game with no learning. Its top score was only 1 food. Each game was up and down with no growth. There was no improvement in performance.
 
@@ -93,88 +80,89 @@ We did all our experiments with 3 agents, and use the average as our result to p
 
 We decided to set our default parameters as the following, and made changes to individual parameters to see how they would change the performance:
 
-Gamma = 0.9
-
-Epsilon = 0.4
-
-Food amount = 1
-
-Learning Rate = 0.001
-
-Reward for food (score) = 10
-
-Collision to wall = -10
-
-Collision to self = -10
-
-Snake going in a loop = -10
+```python
+  Gamma = 0.9
+  Epsilon = 0.4
+  Food_amount = 1
+  Learning_Rate = 0.001
+  Reward_for_food (score) = 10
+  Collision_to_wall = -10
+  Collision_to_self = -10
+  Snake_going_in_a_loop = -10
+```
 
 The graph below shows how our agent performed with the default parameters. The graphs of our experiments show the 5 game moving average of the score at the top to smooth out the graph. The bottom graph shows the running top score record.
 
-![](RackMultipart20210419-4-12q9lef_html_4410b013955acccb.png)
+![Default](graphs/default.png)
 
-  1.
+ 
 ## Gamma
+---
 
-![](RackMultipart20210419-4-12q9lef_html_eb1ec6c3a621c2c0.png)
+![Gamma](graphs/gamma.png)
 
 In this experiment we changed gamma to see how this changed the results. We decided to test 0, 0.5, 0.99. The gamma of 0 meant that the agent was only focused on the immediate rewards which we assumed would do the best, because this is not a long term strategy game the focus is just to get the food each time. Based on the results the best performance was with a gamma of 0.5 which showed much better performance than the other two. This shows that putting weights to the future rewards improves the performance.
 
-  1.
 ## Epislon
+---
 
-![](RackMultipart20210419-4-12q9lef_html_52fba948d5d1be15.png)
+![Eps](graphs/epsilon.png)
 
 We wanted to test how exploration and exploitation would impact the performance. We decided to try no exploration with epsilon of 0 to see what would happen with no exploration, 0.5 to be a balance of both, and 1 to be always exploring with random actions.
 
 Based on the results the epsilon of 0 finds some actions and does not explore so from the graph you can see a small amount of learning. With 0.5 our agent finds optimal values but explores and the graph shows much better learning. With an epsilon of 1 our agent keeps taking random actions so the learning is very slow and it takes a longer for it to find the optimal policy but once it does it seems to get up to where the epsilon of 0.5 does.
 
-  1.
+ 
 ## Rewards
+---
 
-![](RackMultipart20210419-4-12q9lef_html_d7c63499bb18b53e.png)
+![Rewards](graphs/immediate_rewards.png)
 
 In this experiment we decided to change the immediate rewards. Our immediate rewards were for score (S) getting the food, collision with wall or itself (C), and getting stuck in a loop (L). We found that having a large difference between the positive and negative rewards does not do well, possibly because the agent will learn to focus on the larger of the negative or positive rewards, having the reward of equal magnitude allows for better performance. We also found that having rewards that are small in scale do better than rewards that are large in scale. The best performance we found was with rewards of 5 and -5, performance seed to decrease below that at 1 but the performance was quite close, the larger rewards of 30 and -30 performed much worse.
 
-  1.
+ 
 ## Learning rate
+---
 
 First, confirm that you have the correct template for your
 
-![](RackMultipart20210419-4-12q9lef_html_ddd3a7832a221d02.png)
+![Lr](graphs/learning_rate.png)
 
 Changing the learning rate would impact if our agent was able to find an optimal policy and how fast it would learn. We found that a learning rate of 0.05 was too high since this did not produce any learning, and performed similar to our random agent. This was probably because the agent was skipping over the optimal by taking too large a step size. We decide to lower the rate and found that it improves the learning, with the best being the lowest rate we tested of 0.0005, which did significantly better.
 
-  1.
-## Direction
 
-![](RackMultipart20210419-4-12q9lef_html_f4158ad07d9d02ad.png)
+## Direction
+---
+
+![Direction](graphs/food_direction.png)
 
 We decide to try adding a reward for direction of movement of the snake. If it was moving closer to the food we would give it a positive reward, and if it was moving away from the food we would give it a negative reward. The reward of 5 and -5 seemed to perform the best with the fastest learning. This did provide learning for our agent but it did worse than our default parameters that did not have this reward.
 
-  1.
+ 
 ## Distance
+---
 
-![](RackMultipart20210419-4-12q9lef_html_574cd1cea6384ed1.png)
+![Distance](graphs/distance_food.png)
 
 We added rewards for the distance the snake was from the food. We added rewards for score getting the food, close range was 1-2 steps away, far range was 2-9 steps away, and very far range was anything further. This did not show any learning and had a performance similar to our random agent. We did not continue to experiment with this because of the poor performance.
 
-  1.
-## Food Generation
 
-![](RackMultipart20210419-4-12q9lef_html_df0de243a029e026.png)
+## Food Generation
+---
+
+![Food Gen](graphs/multiple_food.png)
 
 Since the game is played with providing the player with one food to get at a time. We decided to see if the agent would learn better by providing it with more food at the start and then decaying the amount of food, thinking that this would improve performance. The agent seemed to not start learning until the food decayed to 1 in all tests. This is probably because there were so many rewards around the agent that it was not able to figure out the optimal policy for when there was only 1 food, causing it to perform poorly and not learn until the food decayed to 1.
 
-1.
+
 # Implementation and Code
+---
 
 We started out by making the snake arcade game using pygame and numpy packages, the game is created inside game.py, the snake is represented as a class, this class is responsible for snake movement, eating and collision functionalities. The window is n x m pixels where is the number of tiles of size S2 where S is the length of the snake, all static configuration is in settings.py where is a mix of constants and few lambda functions. The snake moves by tiles of size S2 being appended to the head of the snake and the rest of the body popped until the current size of the snake is satisfied in the direction of the movement. There are 4 directions: &quot;left&quot;, &quot;right&quot;, &quot;up&quot;, &quot;down&quot;. For simplicity the snake can only turn right, left, or keep moving straight as an action. Food generation is also implemented inside of the snake, where it will generate food randomly inside of the environment and will regenerate if it is inside of the body of the snake. Snake also creates an array size of (11, 1) bits that is stored as the states. Danger in right turn, Danger in straight, Danger in straight, currently moving, left, currently moving right, currently moving up, currently moving down, food on left side of snake, food on right side of snake, food above snake, food below snake. The agent.py is responsible for short term memory and long term memory of the snake, it is also responsible for getting a random action or a predicted action from the model. Model.py is responsible for training of the model and deep-learning itself which we used pytorch and numpy packages for. Main.py is responsible for putting everything together, we implemented a multiprocessing multi level script which reads the parameters of every processor and runs them on separate windows.
 
-1.
-# Conclusion
 
-Before you begin to format your paper, first write and save the content as a separate text file. Complete all content and
+# Conclusion
+---
 
 ##### References
 
@@ -189,7 +177,4 @@ Before you begin to format your paper, first write and save the content as a sep
 9. [https://docs.python.org/3/library/multiprocessing.html](https://docs.python.org/3/library/multiprocessing.html)
 10. [https://github.com/eidenyoshida/Snake-Reinforcement-Learning](https://github.com/eidenyoshida/Snake-Reinforcement-Learning)
 11. [https://github.com/python-engineer/snake-ai-pytorch/blob/main/model.py](https://github.com/python-engineer/snake-ai-pytorch/blob/main/model.py)
-12. Abc
-13.
 
-XXX-X-XXXX-XXXX-X/XX/$XX.00 ©20XX IEEE
