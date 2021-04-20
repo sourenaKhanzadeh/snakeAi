@@ -183,13 +183,13 @@ We chose to use Deep Q-Learning as our algorithm to allow our agent to make opti
 # Related Research
 ---
 
-A paper was published that used a learned policy gradient that is used to update the value function and learn from it with bootstrapping. It found that this &quot;generalizes effectively to complex Atari games&quot; [1].
+A paper was published that used a learned policy gradient that is used to update the value function and learn from it with bootstrapping. It found that this "generalizes effectively to complex Atari games" It includes what to predict (value function) and how to learn from it (bootstrapping) [2].
 
-Research has expanded from simple games to more complex strategy games. Amato and Shani conducted research on using reinforcement learning to strategy games. They found that it was helpful to use different policies depending on different contexts [2].
+Research has expanded from simple games to more complex strategy games. Amato and Shani conducted research on using reinforcement learning to strategy games. They found that it was helpful to use different policies depending on different contexts [3]. 
 
-Deep learning is also being used in reinforcement learning. A paper was published that used a convolutional neural network with Q learning to play Atari games [3]. The paper found that it did better than other reinforcement learning approaches.
+Deep learning is also being used in reinforcement learning. A paper was published that used a convolutional neural network with Q learning to play Atari games [4]. The paper found that its agents did better than previous reinforcement learning approaches. 
 
-There have been some attempts to use bandits in video games. A paper was published that used semi-bandit and bandit and both cases converge to a Nash equilibrium [4].
+There have been several attempts to use bandits in video games. A paper was published that used semi-bandit and bandit and both cases were found to converge to a Nash equilibrium [5]. This is done by ensuring the exploration factor ε never falls below 0.
 
 # Problem Statement and Environment
 ---
