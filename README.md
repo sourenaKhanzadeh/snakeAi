@@ -307,6 +307,10 @@ We started out by making the snake arcade game using pygame and numpy packages, 
 # Conclusion
 ---
 
+## UML
+![class uml](classes_snakeAi_fixed.png)
+![Packages UML](packages_snakeAi.png)
+
 ##### References
 
 1. [https://arxiv.org/pdf/2007.08794.pdf](https://arxiv.org/pdf/2007.08794.pdf)
