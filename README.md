@@ -194,21 +194,25 @@ There have been some attempts to use bandits in video games. A paper was publish
 # Problem Statement and Environment
 ---
 
-A. Obstacles
+## Obstacles
+---
 
-	RL agents face two challenging obstacles in learning the optimal actions in its environment: (1) the environment has incomplete information and/or (2) the state spaces of the agent are extremely large. Luckily in the game Snake we only have to deal with the latter.
+RL agents face two challenging obstacles in learning the optimal actions in its environment: (1) the environment has incomplete information and/or (2) the state spaces of the agent are extremely large. Luckily in the game Snake we only have to deal with the latter.
 
-B. Environment and State Space
+## Environment and State Space
+---
 
-    The environment of the Snake game can be represented as a n x n matrix of cells. Each cell has a width and height of l pixels. A naive approach to building the state would be to simply feed the pixel image of the game to the agent. From the dimensions mentioned above, the state space would be of size |S| ∈ (n x n x l x l). While this method may work for smaller image sizes, training quickly becomes infeasible as the size of the image grows. The simplest way to reduce state size would be to ignore pixels altogether and only feed the agent information about the game cells. The size of the state space would reduce to |S| ∈ (n x n). This way of representing state is still not ideal as the state size increases exponentially as n grows. We will explore state reduction techniques in the next section.
+The environment of the Snake game can be represented as a n x n matrix of cells. Each cell has a width and height of l pixels. A naive approach to building the state would be to simply feed the pixel image of the game to the agent. From the dimensions mentioned above, the state space would be of size |S| ∈ (n x n x l x l). While this method may work for smaller image sizes, training quickly becomes infeasible as the size of the image grows. The simplest way to reduce state size would be to ignore pixels altogether and only feed the agent information about the game cells. The size of the state space would reduce to |S| ∈ (n x n). This way of representing state is still not ideal as the state size increases exponentially as n grows. We will explore state reduction techniques in the next section.
 
-C. Action Space
+## Action Space
+---
 
-	Due to the simplistic nature of Snake there are only four possible actions that can be taken: up, down, left, and right. To speed up training and reduce backwards collisions, we simplified the actions down to three: straight, clockwise turn, and counter-clockwise turn. Representing the actions in this way is beneficial because when the agent 'explores' and randomly picks an action, it will not turn 180 degrees into itself. 
+Due to the simplistic nature of Snake there are only four possible actions that can be taken: up, down, left, and right. To speed up training and reduce backwards collisions, we simplified the actions down to three: straight, clockwise turn, and counter-clockwise turn. Representing the actions in this way is beneficial because when the agent 'explores' and randomly picks an action, it will not turn 180 degrees into itself. 
 
-D. Positive/Negative Rewards
+## Positive/Negative Rewards
+---
 
-	The main reward of the game is when the snake eats food and increases its score. Therefore the reward is directly linked to the final score of the game, similar to how a human would judge its reward. As we will discuss later, we experimented with other positive rewards but ran into a lot of unexpected behaviour. With other positive rewards, the agent may loop infinitely or learn to avoid food altogether to minimize its length. We included additional negative rewards to give the snake more information about its state: collision detection (with itself or wall), looping (discourages infinite loops), empty cell, and close/mid/far/very_far from food (encourages pathing towards food).
+The main reward of the game is when the snake eats food and increases its score. Therefore the reward is directly linked to the final score of the game, similar to how a human would judge its reward. As we will discuss later, we experimented with other positive rewards but ran into a lot of unexpected behaviour. With other positive rewards, the agent may loop infinitely or learn to avoid food altogether to minimize its length. We included additional negative rewards to give the snake more information about its state: collision detection (with itself or wall), looping (discourages infinite loops), empty cell, and close/mid/far/very_far from food (encourages pathing towards food).
 
 
 # Methods and Models
@@ -219,6 +223,8 @@ A common RL algorithm that is used is Q-Learning which has been expanded to incl
 To begin our tests we first used PyGame to create our own Snake game with the basic rules of movement. The snake's actions  are simply to move forward, left, or right based on the direction its facing. The game ends if the snake hits itself or the wall. As it consumes food it grows larger. The goal is to get the snake to eat as much food as possible without ending the game.
 
 After the game was created we created a Deep Q-Learning network using PyTorch. We created a network with an input layer of size 11 which defines the current state of the snake, one hidden layer of 256 nodes, and an output layer of size 3 to determine which action to take. Pictured below is a visual representation of our network.
+
+![NN](graphs/RL.jpg)
 
 Due to the discrete time steps (frames) of the game, we are able to calculate a new state for every new frame of the game. We defined our state parameters to be 11 boolean values based on the direction the snakes moving, the location of danger which we define as a collision that would occur with an action in the next frame, and the location of food relative to the snake. Our 3 actions (the output layer) are the directions of movement for the snake to move relative to the direction it's facing: forward, left, or right. 
 
@@ -357,6 +363,8 @@ Snake going in a loop = -5
 The performance of our optimal agent is slightly better than the default. This is because our default parameters were similar to the optimal parameters from our experiments. Further experimentation would allow for more finetuning of parameters to increase performance.
 
 From our experiments we found that the learning rate, epsilon, gamma, and immediate rewards were the parameters that had the biggest impact on performance. The experiments with direction, distance, and food generation were detrimental to performance and are not parameters that would help with the optimal performance.
+
+![Records](graphs/RLchart.png)
 
 Above is a graph showing the high scores for each experiment for each parameter.
 	
