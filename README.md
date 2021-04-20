@@ -362,6 +362,8 @@ The performance of our optimal agent is slightly better than the default. This i
 
 From our experiments we found that the learning rate, epsilon, gamma, and immediate rewards were the parameters that had the biggest impact on performance. The experiments with direction, distance, and food generation were detrimental to performance and are not parameters that would help with the optimal performance.
 
+![Records](graphs/RLchart.png)
+
 Above is a graph showing the high scores for each experiment for each parameter.
 	
 We combined the parameters that had the best impact on performance and used them as part of our optimal parameters. We found that small changes in the learning rate had the largest difference in performance. From the lowest to its highest result, the difference was a record of 79. The rewards had the second largest range, then epsilon, and then gamma. 
