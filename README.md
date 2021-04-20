@@ -246,7 +246,7 @@ The graph below shows how our agent performed with the default parameters. The g
 
 In this experiment we changed gamma to see how this changed the results. We decided to test 0, 0.5, 0.99. The gamma of 0 meant that the agent was only focused on the immediate rewards which we assumed would do the best, because this is not a long term strategy game the focus is just to get the food each time. Based on the results the best performance was with a gamma of 0.5 which showed much better performance than the other two. This shows that putting weights to the future rewards improves the performance.
 
-## Epislon
+## Epsilon
 ---
 
 ![Eps](graphs/epsilon.png)
