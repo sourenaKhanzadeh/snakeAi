@@ -326,6 +326,21 @@ Agent.py is responsible for short term memory, long term memory, getting a rando
 
 # Conclusion
 ---
+Based on our experiments we decided to take the optimal values we found to see how the agent would perform over a 1000 games compared to the default. The optimal parameters we used were:
+* Gamma = 0.9
+* Epsilon = 1
+* Food amount = 1
+* Learning Rate = 0.0005
+* Reward for food (score) = 5
+* Collision to wall = -5
+* Collision to self = -5
+* Snake going in a loop = -5
+
+![default vs optimal](graphs/default_vs_optimal_parameters.png)
+
+The performance of our optimal agent is slightly better than the default. This is because our default parameters were similar to the optimal parameters from our experiments. Further experimentation would allow for more finetuning of parameters to increase performance.
+	From our experiments we found that the learning rate, epsilon, gamma, and immediate rewards were the parameters that had the biggest impact on performance. The experiments with direction, distance, and food generation were detrimental to performance and are not parameters that would help with the optimal performance.
+
 
 Based on our experiments we decided to take the optimal values we found to see how the agent would perform over a 1000 games compared to the default. The optimal parameters we used were:
 ```python
