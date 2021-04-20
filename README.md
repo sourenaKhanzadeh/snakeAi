@@ -8,9 +8,9 @@ Reinforcement Learning with the classic snake game
 
 ![Snake Game](snake_game.gif)
 
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
+<object data="Final Project Report.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="http://yoursite.com/the.pdf">
-        <p>Final Report: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+        <p>Final Report: <a href="Final Project Report.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
