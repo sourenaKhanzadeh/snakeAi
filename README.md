@@ -380,11 +380,11 @@ Our experiments were a starting point of looking at parameters that would impact
 
 1. https://github.com/sourenaKhanzadeh/snakeAi
 2. https://arxiv.org/pdf/2007.08794.pdf 
-3. (PDF) High-level reinforcement learning in strategy games 
+3. https://www.researchgate.net/publication/221455879_High-level_reinforcement_learning_in_strategy_games
 4. https://arxiv.org/abs/1312.5602 
 5. https://papers.nips.cc/paper/2017/file/39ae2ed11b14a4ccb41d35e9d1ba5 d11-Paper.pdf
-6. Using reinforcement-learning and q-learning to play snake
-7. Learning to play snake at 1 million FPS | by Oscar Knagg
+6. https://medium.com/@hugo.sjoberg88/using-reinforcement-learning-and-q-learning-to-play-snake-28423dd49e9b
+7. https://towardsdatascience.com/learning-to-play-snake-at-1-million-fps-4aae8d36d2f1
 8. http://cs229.stanford.edu/proj2016spr/report/060.pdf
 9. https://mkhoshpa.github.io/RLSnake/
 10. https://docs.python.org/3/library/multiprocessing.html
